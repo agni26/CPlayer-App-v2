@@ -24,7 +24,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
 @CrossOrigin(value = "*")
-@RequestMapping("api/auth")
+@RequestMapping("/api/auth")
 public class UserAuthController {
 	
 	long expireTime = 600000;
@@ -33,9 +33,9 @@ public class UserAuthController {
 	private UserService userService;
 	
 	@PostMapping("register")
-	public ResponseEntity<?> addUser(@RequestBody User user) {
+	public ResponseEntity<User> registerUser(@RequestBody User user) {
 		userService.addUser(user);
-		return new ResponseEntity<String>(user.getUsername(), HttpStatus.CREATED);
+		return new ResponseEntity<User>(HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping
@@ -45,7 +45,7 @@ public class UserAuthController {
 	}
 	
 	@PostMapping("login")
-	public ResponseEntity<?> login(@RequestBody User user) {
+	public ResponseEntity<?> loginUser(@RequestBody User user) {
 
 		String jwtToken = "";
 		Map<String,String> map = new HashMap<>();		
@@ -61,7 +61,6 @@ public class UserAuthController {
 			map.put("message",e.getMessage());
 			map.put("Token",null);
 		}
-		userService.addUser(user);
 		return new ResponseEntity<>(map,HttpStatus.OK);
 	}
 	
@@ -76,7 +75,7 @@ public class UserAuthController {
 		}
 		String jwtToken = Jwts.builder().setSubject(username).setIssuedAt(new Date())
 							.setExpiration(new Date(System.currentTimeMillis()+ expireTime))
-							.signWith(SignatureAlgorithm.HS256, "Cplayer_App_key").compact();
+							.signWith(SignatureAlgorithm.HS256, "CplayerAppkey").compact();
 		return jwtToken;
 	}
 

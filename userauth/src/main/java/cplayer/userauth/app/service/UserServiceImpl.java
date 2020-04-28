@@ -1,7 +1,7 @@
 package cplayer.userauth.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cplayer.userauth.app.model.User;
@@ -26,9 +26,6 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public boolean addUser(User user) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String passEncoded = passwordEncoder.encode(user.getPassword());
-		user.setPassword(passEncoded);
 		try {
 			userRepository.save(user);
 			return true;
@@ -39,7 +36,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public boolean validate(String username, String password) {
-		if(userRepository.validate(username, password) != null ) {
+		if(userRepository.validate(username, password) != null) {
 			return true;
 		}else {
 			return false;
