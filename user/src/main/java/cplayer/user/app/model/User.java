@@ -1,6 +1,5 @@
 package cplayer.user.app.model;
 
-import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,18 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 
 	@Id
-	private int userid;
 	private String username;
 	private String name;
-	private Binary image;
+	private String image;
 	private String mobile;
-	
-	public int getUserid() {
-		return userid;
-	}
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
 	
 	public String getUsername() {
 		return username;
@@ -35,10 +26,10 @@ public class User {
 		this.name = name;
 	}
 	
-	public Binary getImage() {
+	public String getImage() {
 		return image;
 	}
-	public void setImage(Binary image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 	
@@ -49,10 +40,9 @@ public class User {
 		this.mobile = mobile;
 	}
 	
-	
 	@Override
 	public String toString() {
-		return "User [userid=" + userid + ", username=" + username + ", name=" + name + ", image=" + image + ", mobile="
+		return "User [username=" + username + ", name=" + name + ", image=" + image + ", mobile="
 				+ mobile + "]";
 	}
 		

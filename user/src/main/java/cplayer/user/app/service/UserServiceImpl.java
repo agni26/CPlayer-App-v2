@@ -1,6 +1,6 @@
 package cplayer.user.app.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,17 +15,26 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	public List<User> getAllUsers() {
-		return (List<User>) userRepository.findAll();
+	public Optional<User> getUser(String username) {
+		return userRepository.findById(username);
 	}
 
 	@Override
-	public boolean updateUser(User user, int id) {
+	public boolean updateUser(User user, String username) {
 		try {
-			userRepository.deleteById(id);
-			userRepository.insert(user);
+			userRepository.deleteById(username);
+			userRepository.save(user);
 			return true;
 		} catch (Exception e) {
+			return false;
+		}
+	}
+	@Override
+	public boolean addUser(User u) {
+		try {
+			userRepository.insert(u);
+			return true;
+		}catch (Exception e) {
 			return false;
 		}
 	}

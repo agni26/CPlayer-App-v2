@@ -1,5 +1,6 @@
 package cplayer.user.app.controller;
 
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,28 +21,30 @@ import cplayer.user.app.service.UserService;
 @CrossOrigin(value = "*")
 @RequestMapping("api/user")
 public class UserController {
-	
-	long expireTime = 180000;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@GetMapping
-	public ResponseEntity<?> getUser(@RequestParam("username") String username){
-		return new ResponseEntity<Integer>(user.getUserid(), HttpStatus.CREATED);
+	public ResponseEntity<?> getUser(@RequestParam("username") String username) {
+		Optional<User> user = userService.getUser(username);
+		if (userService.getUser(username).isPresent()) {
+			return new ResponseEntity<>(user , HttpStatus.CREATED);
+		}
+		else return new ResponseEntity<String>("Not Found",HttpStatus.NOT_FOUND);
+
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<?> updateUser(@RequestBody User user, @RequestParam("id") int id) {
-		userService.updateUser(user, id);
-		return new ResponseEntity<Integer>(user.getUserid(), HttpStatus.CREATED);
+	public ResponseEntity<?> updateUser(@RequestBody User user, @RequestParam("username") String username) {
+		userService.updateUser(user, username);
+		return new ResponseEntity<String>("Updated", HttpStatus.OK);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<?> login(@RequestBody User user) {
-		return new ResponseEntity<Integer>(user.getUserid(), HttpStatus.CREATED);
+	public ResponseEntity<?> adduser(@RequestBody User user) {
+		userService.addUser(user);
+		return new ResponseEntity<String>("Added", HttpStatus.CREATED);
 	}
-	
-	
 
 }

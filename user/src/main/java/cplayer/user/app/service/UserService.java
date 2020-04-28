@@ -1,11 +1,11 @@
 package cplayer.user.app.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import cplayer.user.app.model.User;
 
 public interface UserService {
-	public List<User> getAllUsers();
-	public boolean updateUser(User u, int id);
-	public 
+	public Optional<User> getUser(String username);
+	public boolean updateUser(User u, String username);
+	public boolean addUser(User u);
 }
