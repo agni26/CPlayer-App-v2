@@ -3,14 +3,21 @@ package cplayer.userauth.app.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-
+// Table name will be User
 @Entity
 public class User {
-
+	
+	/*
+	 * Defining the columns in the table
+	 * Marking username of type string as Primary Key
+	 */
 	@Id
 	private String username;
 	private String password;
-
+	
+	/*
+	 * Creating Getters and Setters
+	*/
 	public String getUsername() {
 		return username;
 	}
@@ -24,6 +31,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	/*
+	 * overriding the toString Method
+	*/
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + "]";

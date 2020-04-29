@@ -2,7 +2,8 @@ package cplayer.userauth.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+
+// Spring Boot Application which will be used for the purpose of User Authentication
 
 @SpringBootApplication
 public class UserApplication {

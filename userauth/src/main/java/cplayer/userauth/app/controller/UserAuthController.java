@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,36 +28,81 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @RequestMapping("/api/auth")
 public class UserAuthController {
 	
+	// Defining expiry time of the JWTtoken in milliseconds
 	long expireTime = 600000;
 	
 	@Autowired
 	private UserService userService;
 	
+	/*
+	 * http://localhost:8000/api/auth/register (Post)
+	 * End point for getting a user registered,
+	 * If registered successfully returning status as Created (201)
+	 * Otherwise returning status as Bad_REQUST (400)
+	 */
 	@PostMapping("register")
 	public ResponseEntity<User> registerUser(@RequestBody User user) {
-		userService.addUser(user);
-		return new ResponseEntity<User>(HttpStatus.CREATED);
+		if(userService.addUser(user)) {
+			return new ResponseEntity<User>(HttpStatus.CREATED);
+		}
+		else return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+
 	}
 	
+	/*
+	 * http://localhost:8000/api/auth/ (Delete)
+	 * End point for deleting an already registered user,
+	 * If deleted successfully returning status as OK (200)
+	 * Otherwise returning status as NOT_FOUND (404)
+	 */
 	@DeleteMapping
 	public ResponseEntity<?> delUser(@RequestParam String username){
-		userService.deleteUser(username);
-		return new ResponseEntity<>(HttpStatus.OK);
+		if(userService.deleteUser(username)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
 	}
 	
+	/*
+	 * http://localhost:8000/api/auth/ (Put)
+	 * End point for updating password of an already registered user,
+	 * If updated successfully returning status as OK (200)
+	 * Otherwise returning status as NOT_FOUND (404)
+	 */
+	@PutMapping
+	public ResponseEntity<?> update(@RequestBody User user, @RequestBody String newpass){
+		if(userService.updateUser(user.getUsername(), user.getPassword(), newpass)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+	}
+	
+	/*
+	 * http://localhost:8000/api/auth/login (Post)
+	 * End point for validating an already registered user,
+	 * If validated successfully returning status as OK (200)
+	 * And also Return the Token
+	 * If not validated then the token will contain null
+	 */
 	@PostMapping("login")
 	public ResponseEntity<?> loginUser(@RequestBody User user) {
 
 		String jwtToken = "";
 		Map<String,String> map = new HashMap<>();		
+		
 		try {
 			
+			// Calling the getToken method as written below
 			jwtToken = getToken(user.getUsername(),user.getPassword());
 			map.clear();
 			map.put("message", "User logged in successfully");
 			map.put("Token",jwtToken);
 			
 		}catch(Exception e) {
+			
+			// In case of exception returning the error message and the null in place of token
 			map.clear();
 			map.put("message",e.getMessage());
 			map.put("Token",null);
@@ -66,13 +112,20 @@ public class UserAuthController {
 	
 	public String getToken(String username,String password) throws Exception {
 		
+		// If either of username or password field is empty it will throw exception
 		if(username == null || password == null) {
 			throw new ServletException("Please fill the Username and Password");
 		}
+		
+		// Calling the validate(String username, String password) of return type boolean
 		boolean status = userService.validate(username,password);
+		
+		// Throwing exception if the user is not a valid user
 		if(!status) {
 			throw new ServletException("Invalid Credentials");
 		}
+		
+		// Generating token only when the user is validated
 		String jwtToken = Jwts.builder().setSubject(username).setIssuedAt(new Date())
 							.setExpiration(new Date(System.currentTimeMillis()+ expireTime))
 							.signWith(SignatureAlgorithm.HS256, "CplayerAppkey").compact();

@@ -15,8 +15,10 @@ import com.fasterxml.jackson.core.JsonParseException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
+// Implementing Filter interface of javax.servlet
 public class JWTFilter implements Filter{
 
+	// Filtering is performed in the doFilter method of Filter
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterchain) throws IOException, ServletException {
 		
@@ -35,7 +37,7 @@ public class JWTFilter implements Filter{
 			
 			String token = authHeader.split(" ")[1];			
 			try {
-			final Claims claims = Jwts.parser().setSigningKey("secretKey").parseClaimsJws(token).getBody();
+			final Claims claims = Jwts.parser().setSigningKey("CplayerAppkey").parseClaimsJws(token).getBody();
 			request.setAttribute("claims", claims);
 			filterchain.doFilter(request, response);
 			}catch(JsonParseException j) {
