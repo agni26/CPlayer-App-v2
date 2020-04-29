@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean addUser(User user) {
 		try {
-			if(userRepository.findById(user.getUsername()) == null) {
+			if(!userRepository.existsById(user.getUsername())) {
 				userRepository.save(user);
 				return true;
 			}
@@ -79,8 +79,9 @@ public class UserServiceImpl implements UserService{
 					return false;
 				}
 			}
+			else return false;
 		}
-		return true;
+		else return false;
 	}
 	
 }

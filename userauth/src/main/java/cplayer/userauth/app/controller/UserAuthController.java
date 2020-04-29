@@ -71,8 +71,8 @@ public class UserAuthController {
 	 * Otherwise returning status as NOT_FOUND (404)
 	 */
 	@PutMapping
-	public ResponseEntity<?> update(@RequestBody User user, @RequestBody String newpass){
-		if(userService.updateUser(user.getUsername(), user.getPassword(), newpass)) {
+	public ResponseEntity<?> update(@RequestBody Map<String, String> json){
+		if(userService.updateUser(json.get("username"), json.get("oldpass"), json.get("newpass"))) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
