@@ -1,0 +1,33 @@
+.pos{
+   width: 97.5%;
+   height: 120px;
+   position: fixed;
+   bottom: 3px;
+   color: rgba(255, 199, 199, 0.801);
+   background-color: rgba(36, 15, 70, 0.795);
+}
+.follow{
+   margin-left: 10px;
+   margin-bottom: 20px;
+}
+.team{
+   position: absolute;
+   font-size: 23px;
+   right: 86px;
+   bottom: 87px;
+}
+.names{
+   margin-top: 2px;
+   position: absolute;
+   right: 10px;
+   font-style: italic;
+   font-family: serif;
+   font-size: 18px;
+   margin-bottom: 3px;
+}
+img{
+   height: 60px;
+   position: absolute;
+   right: 82px;
+   bottom: 20px;
+}

@@ -1,13 +1,14 @@
-<form [formGroup] = "loginForm" (ngSubmit)="signIn()">
+<div class="login"> Login Form</div>
+<form [formGroup]="loginForm" (ngSubmit)="signIn()">
     <div>
-        <label for="email">email</label>
+        <label for="email">Email</label>
         <input type="text" placeholder="enter email" formControlName="email">
         <small *ngIf="email.invalid && (email.dirty || email.touched)">
             email is mandatory field
         </small>
     </div>
     <div>
-        <label for="password">password</label>
+        <label for="password">Password</label>
         <input type="password" placeholder="enter password" formControlName="password">
         <small *ngIf="password.invalid && (password.dirty || password.touched)">
             <small *ngIf="password.errors.required">
@@ -19,10 +20,9 @@
         </small>
     </div>
 
-    <div>
-        <button value="sign In">log in</button>
-            <!--input class="submit"[disabled} = "!loginForm.valid" value="signIn"-->
+    <div class="but">
+        <button value="sign In">Log In</button>
+        <!--input class="submit"[disabled} = "!loginForm.valid" value="signIn"-->
+        <button value="sign In">New User</button>
     </div>
 </form>
-
-

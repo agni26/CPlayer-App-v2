@@ -1,12 +1,32 @@
-mat-toolbar{
-    font-size: 4vw;
-    font-style: Bebas Neue;
-    
+.col{
+    background-color: rgba(36, 15, 70, 0.795);
+    height: 100px;
+}
+.name{
+    margin-top: 28px;
+    margin-right: 10px;
+    font-style: italic;
+    color: rgba(255, 199, 199, 0.801);
+    font-size: 52px;
 }
 
-h1{
-    font-size: large;
-    text-align: end;
+.contact{
+    font-size: 22px;
+    position: absolute;
+    right: 30px;
+    margin-top: 9px;
+    color: rgba(255, 199, 199, 0.801);
 }
-
-
+.signup{
+    font-size: 22px;
+    position: absolute;
+    right: 170px;
+    margin-top: 9px;
+    color: rgba(255, 199, 199, 0.801);
+}
+img{
+    height: 105px;
+    margin-top: 38px;
+    margin-left: 0px;
+    margin-right: 5px;
+}
