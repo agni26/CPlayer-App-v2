@@ -41,11 +41,11 @@ public class UserAuthController {
 	 * Otherwise returning status as Bad_REQUST (400)
 	 */
 	@PostMapping("register")
-	public ResponseEntity<User> registerUser(@RequestBody User user) {
+	public ResponseEntity<String> registerUser(@RequestBody User user) {
 		if(userService.addUser(user)) {
-			return new ResponseEntity<User>(HttpStatus.CREATED);
+			return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 		}
-		else return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+		else return new ResponseEntity<String>("no", HttpStatus.BAD_REQUEST);
 
 	}
 	
@@ -56,11 +56,11 @@ public class UserAuthController {
 	 * Otherwise returning status as NOT_FOUND (404)
 	 */
 	@DeleteMapping
-	public ResponseEntity<?> delUser(@RequestParam String username){
+	public ResponseEntity<String> delUser(@RequestParam String username){
 		if(userService.deleteUser(username)) {
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<String>("ok", HttpStatus.OK);
 		}
-		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		else return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
 
 	}
 	
@@ -71,11 +71,11 @@ public class UserAuthController {
 	 * Otherwise returning status as NOT_FOUND (404)
 	 */
 	@PutMapping
-	public ResponseEntity<?> update(@RequestBody Map<String, String> json){
+	public ResponseEntity<String> update(@RequestBody Map<String, String> json){
 		if(userService.updateUser(json.get("username"), json.get("oldpass"), json.get("newpass"))) {
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<String>("ok", HttpStatus.OK);
 		}
-		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		else return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
 
 	}
 	

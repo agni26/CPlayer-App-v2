@@ -32,30 +32,37 @@ public class UserController {
 		if (userService.getUser(username).isPresent()) {
 			return new ResponseEntity<>(user, HttpStatus.CREATED);
 		} else
-			return new ResponseEntity<String>("Not Found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
 
 	}
 
 	@PutMapping
 	public ResponseEntity<?> updateUser(@RequestBody User user, @RequestParam("username") String username) {
-		userService.updateUser(user, username);
-		return new ResponseEntity<String>("Updated", HttpStatus.OK);
+		try {
+			if (userService.updateUser(user, username)) {
+				return new ResponseEntity<String>("ok", HttpStatus.OK);
+			} else
+				return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
+		}
+
 	}
-	
+
 	@DeleteMapping
 	public ResponseEntity<?> delUser(@RequestParam("username") String username) {
-		if(userService.deleteUser(username)) {
-		return new ResponseEntity<String>("Deleted", HttpStatus.OK);
-		}
-		else return new ResponseEntity<String>("Not Found", HttpStatus.BAD_REQUEST);
+		if (userService.deleteUser(username)) {
+			return new ResponseEntity<String>("ok", HttpStatus.OK);
+		} else
+			return new ResponseEntity<String>("no", HttpStatus.BAD_REQUEST);
 	}
 
 	@PostMapping
 	public ResponseEntity<?> adduser(@RequestBody User user) {
 		if (userService.addUser(user)) {
-			return new ResponseEntity<String>("Added", HttpStatus.CREATED);
-		}
-		else return new ResponseEntity<String>("Already Exist", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("ok", HttpStatus.CREATED);
+		} else
+			return new ResponseEntity<String>("no", HttpStatus.BAD_REQUEST);
 	}
 
 }
