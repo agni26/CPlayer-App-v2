@@ -29,12 +29,29 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean deleteUser(String username) {
+		try {
+			if (userRepository.existsById(username)) {
+				userRepository.deleteById(username);
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 	@Override
 	public boolean addUser(User u) {
 		try {
-			userRepository.insert(u);
-			return true;
-		}catch (Exception e) {
+			if (!userRepository.existsById(u.getUsername())) {
+				userRepository.insert(u);
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
 			return false;
 		}
 	}

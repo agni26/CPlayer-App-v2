@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,9 +30,9 @@ public class UserController {
 	public ResponseEntity<?> getUser(@RequestParam("username") String username) {
 		Optional<User> user = userService.getUser(username);
 		if (userService.getUser(username).isPresent()) {
-			return new ResponseEntity<>(user , HttpStatus.CREATED);
-		}
-		else return new ResponseEntity<String>("Not Found",HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(user, HttpStatus.CREATED);
+		} else
+			return new ResponseEntity<String>("Not Found", HttpStatus.NOT_FOUND);
 
 	}
 
@@ -40,11 +41,21 @@ public class UserController {
 		userService.updateUser(user, username);
 		return new ResponseEntity<String>("Updated", HttpStatus.OK);
 	}
+	
+	@DeleteMapping
+	public ResponseEntity<?> delUser(@RequestParam("username") String username) {
+		if(userService.deleteUser(username)) {
+		return new ResponseEntity<String>("Deleted", HttpStatus.OK);
+		}
+		else return new ResponseEntity<String>("Not Found", HttpStatus.BAD_REQUEST);
+	}
 
 	@PostMapping
 	public ResponseEntity<?> adduser(@RequestBody User user) {
-		userService.addUser(user);
-		return new ResponseEntity<String>("Added", HttpStatus.CREATED);
+		if (userService.addUser(user)) {
+			return new ResponseEntity<String>("Added", HttpStatus.CREATED);
+		}
+		else return new ResponseEntity<String>("Already Exist", HttpStatus.BAD_REQUEST);
 	}
 
 }

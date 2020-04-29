@@ -8,4 +8,5 @@ public interface UserService {
 	public Optional<User> getUser(String username);
 	public boolean updateUser(User u, String username);
 	public boolean addUser(User u);
+	boolean deleteUser(String username);
 }
