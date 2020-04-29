@@ -17,27 +17,27 @@ import org.springframework.web.bind.annotation.RestController;
 import cplayer.favourites.app.model.Favourites;
 import cplayer.favourites.app.service.FavouritesService;
 
-@RestController
-@RequestMapping("/api/fav")
-@CrossOrigin(value = "*")
+@RestController                 //takes care of mapping request data to the defined request handler method.
+@RequestMapping("/api/fav")     //maps HTTP requests to handler methods of MVC and REST controllers.
+@CrossOrigin(value = "*")       //helps to request additional resources into browser from other domains
 public class FavouritesController {
 	
-	@Autowired
+	@Autowired          //injecting the object dependency implicitly
 	private FavouritesService favouritesService;
-	
-	@GetMapping
+	 
+	@GetMapping         //GET requests onto specific handler methods.
 	public ResponseEntity<List<Favourites>> getAllPlayers() {
 		return new ResponseEntity<List<Favourites>>(favouritesService.getAllData(),HttpStatus.OK);
 	}
 	
-	@PostMapping
+	@PostMapping        //POST requests matched with given URL expression
 	public ResponseEntity<Favourites> addData(@RequestBody Favourites favs) {
 		favouritesService.addData(favs);
 		return new ResponseEntity<Favourites>(HttpStatus.CREATED);
 	}
 	
 	
-	@DeleteMapping
+	@DeleteMapping      //maps  HTTP DELETE requests onto specific handler methods
 	public ResponseEntity<String> deleteData(@RequestParam("id") int id){
 		favouritesService.removeData(id);
 		return new ResponseEntity<String>(HttpStatus.OK);

@@ -6,14 +6,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Favourites {
 	
 	@Id
-	private int pid;
-	private String country;
-	private String name;
-	private String fullName;
-	private String majorTeams;
-	private String currentAge;
-	private String imageURL;
-	private String playingRole;
+	private int pid;               //Getting player id to be stored as private
+	private String country;        //Getting player country to be stored as private
+	private String name;           //Getting player name to be stored as private
+	private String fullName;       //Getting player fullName to be stored as private
+	private String majorTeams;     //Getting info about major teams to be stored as private
+	private String currentAge;     //Getting player currentAge to be stored as private
+	private String imageURL;       //Getting player imageURL to be stored as private
+	private String playingRole;    //Getting player role to be stored as private
 	
 	public int getPid() {
 		return pid;
@@ -71,7 +71,7 @@ public class Favourites {
 		this.playingRole = playingRole;
 	}
 	
-	@Override
+	@Override      //Child class method is over-writing its base class method
 	public String toString() {
 		return "Favourites [pid=" + pid + ", country=" + country + ", name=" + name + ", fullName=" + fullName
 				+ ", majorTeams=" + majorTeams + ", currentAge=" + currentAge + ", imageURL=" + imageURL
