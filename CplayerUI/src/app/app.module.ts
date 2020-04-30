@@ -5,10 +5,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-
 import { AppRoutingModule } from './app-routing.module';
-import {ReactiveFormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SearchComponent } from './search/search.component';
 import { StatsComponent } from './stats/stats.component';
@@ -33,6 +32,8 @@ import { EdituserComponent } from './edituser/edituser.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { SignupComponent } from './signup/signup.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { ReviewsComponent } from './reviews/reviews.component';
     EdituserComponent,
     DashboardComponent,
     CalendarComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    SignupComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

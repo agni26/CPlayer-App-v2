@@ -1,18 +1,93 @@
-.form-group{
-    width :35vw;
-    align-items: center;
-}
-  
-h1{
-    font-size: 2.9vw;
-    color : black;
-    font-style: Baufra;
+form{
+   border: 1px solid navy;
+   background-color: rgba(0, 0, 0, 0.616);
+   border-width: 2px;
+   margin:auto;
+   margin-top: 20px;
+   width:40vw;
+} 
 
-}
-.container{
-    background-color: lightblue;
-     border: lightcyan;
-     font-size: x-large;
-
+form div {
+   padding: 10px;
 }
 
+form div button{
+   width : 35%;
+   height: 30px;
+   background-color: rgba(6, 3, 22, 0.692);
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.466);
+    color: lavenderblush;
+   font-size: 15px;
+   margin: 2vh auto;
+}
+
+.but{
+   display: flex;
+   margin-left: 10px;
+}
+
+small{
+   color: red;
+   font-style: italic;
+}
+label{
+   color: rgba(255, 199, 199, 0.801);
+   font-size: 20px;
+   margin-top: 15px;
+   margin-bottom: 10px;
+   margin-left:  1.5%;
+}
+
+.signup{
+   color: rgba(255, 199, 199, 0.801);
+   font-size: 28px;
+   text-align: center;
+   margin-top: 1%;
+}
+.email{
+   width: 27vw;
+   background-color: rgba(0, 0, 0, 0);
+   border-width: 1px;
+   border-color: rgba(0, 0, 0, 0.466);
+   color: lavenderblush;
+   height: 28px;
+   margin-left: 64px;
+}
+.password{
+   width: 27vw;
+   background-color: rgba(0, 0, 0, 0);
+   border-width: 1px;
+   border-color: rgba(0, 0, 0, 0.466);
+   color: lavenderblush;
+   height: 28px;
+   margin-left: 25px;
+}
+.name{
+   width: 27vw;
+   background-color: rgba(0, 0, 0, 0);
+   border-width: 1px;
+   border-color: rgba(0, 0, 0, 0.466);
+   color: lavenderblush;
+   height: 28px;
+   margin-left: 60px;
+}
+.mobile{
+   width: 27vw;
+   background-color: rgba(0, 0, 0, 0);
+   border-width: 1px;
+   border-color: rgba(0, 0, 0, 0.466);
+   color: lavenderblush;
+   height: 25px;
+   margin-left: 53px;
+}
+.err{
+   margin-left: 130px;
+}
+.image{
+   width: 27vw;
+   border-width: 1px;
+   color: rgb(255, 4, 4);
+   height: 25px;
+   margin-left: 60px;
+}

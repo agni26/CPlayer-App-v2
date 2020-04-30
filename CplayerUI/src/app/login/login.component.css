@@ -1,6 +1,6 @@
 form{
     border: 1px solid navy;
-    border-width: 2px;
+    background-color: rgba(0, 0, 0, 0.616);
     margin:auto;
     margin-top: 30px;
     width:40vw;
@@ -16,12 +16,20 @@ form div {
 
 form div input{
     width: 80%;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.466);
+    color: lavenderblush;
     margin: 1vh auto;
-    height: 22px;
+    height: 28px;
 }
 
 form div button{
     width : 35%;
+    background-color: rgba(6, 3, 22, 0.692);
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.466);
+    color: lavenderblush;
     height: 30px;
     font-size: 15px;
     margin: 2vh auto;
@@ -45,7 +53,7 @@ label{
 
 .login{
     color: rgba(255, 199, 199, 0.801);
-    font-size: 20px;
+    font-size: 30px;
     text-align: center;
     margin-top: 2%;
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {signupUser } from './signuser'
-import {NgForm, FormGroupDirective} from '@angular/forms';
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { RouterService } from '../router.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,19 +8,54 @@ import {NgForm, FormGroupDirective} from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-   
-  user:signupUser;
-  signup : NgForm;
-  constructor() { 
-    this.user=new signupUser();
-  }
+
+  constructor(private route: RouterService) { }
 
   ngOnInit(): void {
   }
-    signupData(signup: NgForm){
-      console.log(signup.value);
-      this.user = signup.value;
-      signup.reset();
-    }
+
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    name: new FormControl('', [Validators.required]),
+    mobile: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    image: new FormControl('')
+  })
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+  get password() {
+    return this.loginForm.get('password');
+  }
+  get name() {
+    return this.loginForm.get('name');
+  }
+  get mobile() {
+    return this.loginForm.get('email');
+  }
+
+  signIn() {
+    console.log(this.loginForm.value);
+    console.log(this.loginForm.value.image);
+  }
+  tologin() {
+    this.route.tologin();
+  }
+  
+  onFileChanged(event) {
+    let me = this;
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      //me.modelvalue = reader.result;
+      console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+  }
+
 
 }

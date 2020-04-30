@@ -1,30 +1,51 @@
-<div class="container ">
-    <h1 class="alert aalert-primary m-3 ">Signup Form</h1>
-    
-<form #signup = "ngForm" (ngSubmit)="signupData(signup)" >
-    <div class="form-group text-center">
-        <label for="Name">Username</label>
-        <input type="text" class="form-control" placeholder="Name"
-         [(ngModel)] = "user.Name"  name="Name" #Name="ngModel" minlength="5" required>
-    </div>
-    <div class="form-group text-center">
-      <label for="exampleInputEmail1 text-center">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" 
-      [(ngModel)] = "user.email"   name="email" #email="ngModel" minlength="8" required>
-      <small id="emailHelp" class="form-text text-muted"></small>
-    </div>
-    <div class="form-group text-center">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" 
-      [(ngModel)] = "user.password" name="password"  #password="ngModel" minlength="6" required>
-    
-    </div >
-    
-   <div class="submit form-group " >
-    <button type="Signup"  class="btn btn-primary">Signnup</button >
+<div class="signup">Sign Up Form</div>
+<form [formGroup]="loginForm" (ngSubmit)="signIn()">
+   <div>
+      <label for="email">Email</label>
+      <input class="email" type="text" placeholder="  Enter email" formControlName="email"><br>
+      <small class="err" *ngIf="email.invalid && (email.dirty || email.touched)">
+         Email is mandatory field
+      </small>
    </div>
-   <div class="submit form-groupp">
-      <button type="already signin" class="btn btn-primary "  >Already Signup</button >
-      </div>
-  </form>
-  </div>
+   <div>
+      <label for="password">Password</label>
+      <input class="password" type="password" placeholder="  Enter password" formControlName="password"><br>
+      <small *ngIf="password.invalid && (password.dirty || password.touched)">
+         <small class="err" *ngIf="password.errors.required">
+            Password cannot be left blank
+         </small>
+         <small class="err" *ngIf="password.errors.minlength">
+            Password must have minimum 8characters
+         </small>
+      </small>
+   </div>
+   <div>
+      <label for="name">Name</label>
+      <input class="name" type="text" placeholder="  Enter your name" formControlName="name"><br>
+      <small class="err" *ngIf="name.invalid && (name.dirty || name.touched)">
+         Name is mandatory field
+      </small>
+   </div>
+   <div>
+      <label for="mobile">Mobile</label>
+      <input class="mobile" type="text" placeholder="  Enter your mobile" formControlName="mobile"><br>
+      <small class="err" *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
+         Enter a valid 10 digit Mobile Number
+      </small>
+   </div>
+
+   <div class="image-upload-container btn btn-bwm">
+      <label>Image</label>
+      <input #imageInput
+            class="image"
+            formControlName="image"
+            type="file"
+            (change)="onFileChanged($event)">
+   </div>
+
+   <div class="but">
+      <button value="sign Up">Sign Up</button>
+      <!--input class="submit"[disabled} = "!loginForm.valid" value="signIn"-->
+      <button (click)="tologin()" value="sign In">New User</button>
+   </div>
+</form>
