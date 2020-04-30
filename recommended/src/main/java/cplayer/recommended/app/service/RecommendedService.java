@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import cplayer.recommended.app.model.Recommended;
 import cplayer.recommended.app.repository.RecommendedRepository;
 
-@Service
+@Service                            // These class files are used to write business logic in a different layer, separated from @RestController class file
 public class RecommendedService {
 	
-	@Autowired
+	@Autowired                      //The @Autowired annotation can be used to autowire bean on the setter method
 	private RecommendedRepository recommendedRepository;
 	
 	public List<Recommended> getAllData() {

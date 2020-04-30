@@ -72,7 +72,7 @@ public class Recommended {
 		this.playingRole = playingRole;
 	}
 	
-	@Override
+	@Override                //When the name of super's methods changing, the compiler can notify that case
 	public String toString() {
 		return "Favourites [pid=" + pid + ", country=" + country + ", name=" + name + ", fullName=" + fullName
 				+ ", majorTeams=" + majorTeams + ", currentAge=" + currentAge + ", imageURL=" + imageURL

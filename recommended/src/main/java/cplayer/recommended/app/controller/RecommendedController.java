@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 import cplayer.recommended.app.model.Recommended;
 import cplayer.recommended.app.service.RecommendedService;
 
-@RestController
-@RequestMapping("/api/recom")
-@CrossOrigin(value = "*")
+@RestController                         //This annotation is applied to a class to mark it as a request handler.
+@RequestMapping("/api/recom")           //We can use it with class definition to create the base URI
+@CrossOrigin(value = "*")               // This annotation marks the annotated method or type as permitting cross origin requests
 public class RecommendedController {
 
-	@Autowired
+	@Autowired                          //This can be used to autowire bean on the setter method 
 	private RecommendedService recommendedService;
 
-	@GetMapping
+	@GetMapping                         //Annotation for mapping HTTP GET requests onto specific handler methods.
 	public ResponseEntity<?> getAllPlayers() {
 		try {
 			return new ResponseEntity<List<Recommended>>(recommendedService.getAllData(), HttpStatus.OK);
@@ -34,7 +34,7 @@ public class RecommendedController {
 		}
 	}
 
-	@PostMapping
+	@PostMapping                        // @PostMapping is a composed annotation that acts as a shortcut for @RequestMapping
 	public ResponseEntity<String> addData(@RequestBody Recommended favs) {
 		try {
 			if (recommendedService.addData(favs)) {
@@ -46,7 +46,7 @@ public class RecommendedController {
 		}
 	}
 
-	@DeleteMapping
+	@DeleteMapping                     //@DeleteMapping to delete a resource
 	public ResponseEntity<String> deleteData(@RequestParam("id") int id) {
 		try {
 			if (recommendedService.removeData(id)) {
