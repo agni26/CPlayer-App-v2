@@ -6,4 +6,4 @@ import cplayer.favourites.app.model.Favourites;
 
 public interface FavouritesRepository extends MongoRepository<Favourites, Integer> {
 	
-}
+}      //Player data stored in repository is accessed.

@@ -1,6 +1,9 @@
 package cplayer.favourites.app;
 
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringApplication;    
+
+//// Spring Boot Application which will be used for the purpose of User Authentication
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
