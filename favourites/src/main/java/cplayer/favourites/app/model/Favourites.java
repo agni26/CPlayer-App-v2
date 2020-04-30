@@ -1,11 +1,17 @@
 package cplayer.favourites.app.model;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Favourites {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	private String username;
 	private int pid;               //Getting player id to be stored as private
 	private String country;        //Getting player country to be stored as private
 	private String name;           //Getting player name to be stored as private
@@ -22,6 +28,19 @@ public class Favourites {
 		this.pid = pid;
 	}
 	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getCountry() {
 		return country;
 	}
@@ -70,12 +89,11 @@ public class Favourites {
 	public void setPlayingRole(String playingRole) {
 		this.playingRole = playingRole;
 	}
-	
-	@Override      //Child class method is over-writing its base class method
+	@Override
 	public String toString() {
-		return "Favourites [pid=" + pid + ", country=" + country + ", name=" + name + ", fullName=" + fullName
-				+ ", majorTeams=" + majorTeams + ", currentAge=" + currentAge + ", imageURL=" + imageURL
-				+ ", playingRole=" + playingRole + "]";
+		return "Favourites [id=" + id + ", username=" + username + ", pid=" + pid + ", country=" + country + ", name="
+				+ name + ", fullName=" + fullName + ", majorTeams=" + majorTeams + ", currentAge=" + currentAge
+				+ ", imageURL=" + imageURL + ", playingRole=" + playingRole + "]";
 	}
-	
+		
 }

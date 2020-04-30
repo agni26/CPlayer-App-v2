@@ -35,9 +35,9 @@ public class RecommendedController {
 	}
 
 	@PostMapping                        // @PostMapping is a composed annotation that acts as a shortcut for @RequestMapping
-	public ResponseEntity<String> addData(@RequestBody Recommended favs) {
+	public ResponseEntity<String> addData(@RequestBody Recommended recoms) {
 		try {
-			if (recommendedService.addData(favs)) {
+			if (recommendedService.addData(recoms)) {
 				return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 			} else
 				return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);

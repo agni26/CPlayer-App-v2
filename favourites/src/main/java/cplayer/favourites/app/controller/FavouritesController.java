@@ -26,20 +26,26 @@ public class FavouritesController {
 	private FavouritesService favouritesService;
 	 
 	@GetMapping         //GET requests onto specific handler methods.
-	public ResponseEntity<List<Favourites>> getAllPlayers() {
-		return new ResponseEntity<List<Favourites>>(favouritesService.getAllData(),HttpStatus.OK);
+	public ResponseEntity<?> getAllPlayers(@RequestParam("username") String username) {
+		try {
+			return new ResponseEntity<List<Favourites>>(favouritesService.getAllData(username),HttpStatus.OK);
+		}catch (Exception e) {
+			return new ResponseEntity<String>("no",HttpStatus.OK);
+		}
 	}
 	
 	@PostMapping        //POST requests matched with given URL expression
-	public ResponseEntity<Favourites> addData(@RequestBody Favourites favs) {
-		favouritesService.addData(favs);
-		return new ResponseEntity<Favourites>(HttpStatus.CREATED);
+	public ResponseEntity<?> addData(@RequestBody Favourites favs) {
+		if(favouritesService.addData(favs)) {
+			return new ResponseEntity<String>("ok", HttpStatus.CREATED);
+		}
+		else return new ResponseEntity<String>("no", HttpStatus.CREATED);
 	}
 	
 	
 	@DeleteMapping      //maps  HTTP DELETE requests onto specific handler methods
-	public ResponseEntity<String> deleteData(@RequestParam("id") int id){
-		favouritesService.removeData(id);
+	public ResponseEntity<String> deleteData(@RequestParam("username") String username){
+		favouritesService.removeData(username);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 

@@ -14,22 +14,22 @@ public class FavouritesService {
 	@Autowired
 	private FavouritesRepository favouritesRepository;
 	
-	public List<Favourites> getAllData() {
-		return (List<Favourites>) favouritesRepository.findAll();
+	public List<Favourites> getAllData(String username) {
+		return (List<Favourites>) favouritesRepository.findByUsername(username);
 	}
 
-	public boolean addData(Favourites zomato) {
+	public boolean addData(Favourites favs) {
 		try {
-			favouritesRepository.save(zomato);
+			favouritesRepository.save(favs);
 			return true;
 		}catch(Exception e) {
 			return false;
 		}
 	}	
 	
-	public boolean removeData(int id) {
+	public boolean removeData(String username) {
 		try {
-			favouritesRepository.deleteById(id);
+			System.out.println(favouritesRepository.deleteByUsername(username));
 			return true;
 		}catch(Exception e) {
 			System.out.println("no");

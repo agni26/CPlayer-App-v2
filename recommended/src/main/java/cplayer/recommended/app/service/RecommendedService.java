@@ -15,21 +15,39 @@ public class RecommendedService {
 	private RecommendedRepository recommendedRepository;
 	
 	public List<Recommended> getAllData() {
-		return (List<Recommended>) recommendedRepository.findAll();
+		List<Recommended> list = recommendedRepository.findAll();
+		list.removeIf(e -> (e.getCount()<5));
+		return list;
 	}
 
-	public boolean addData(Recommended zomato) {
+	public boolean addData(Recommended recommended) {
+		int pid = recommended.getPid();
 		try {
-			recommendedRepository.save(zomato);
-			return true;
+			if(recommendedRepository.findById(pid).isEmpty()) {
+				recommended.setCount(1);
+				recommendedRepository.save(recommended);
+				return true;
+			}
+			else{
+				int count = recommendedRepository.findById(pid).get().getCount();
+				recommendedRepository.deleteById(pid);
+				recommended.setCount(count+1);
+				recommendedRepository.save(recommended);
+				return true;
+			}
 		}catch(Exception e) {
 			return false;
 		}
-	}	
+	}
 	
 	public boolean removeData(int id) {
 		try {
-			recommendedRepository.deleteById(id);
+			if(recommendedRepository.findById(id).isPresent()) {
+				Recommended recom = recommendedRepository.findById(id).get();
+				recommendedRepository.deleteById(id);
+				recom.setCount(recom.getCount() - 1);
+				recommendedRepository.save(recom);
+			}
 			return true;
 		}catch(Exception e) {
 			return false;

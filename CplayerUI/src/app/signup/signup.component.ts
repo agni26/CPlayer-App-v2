@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterService } from '../router.service';
+import { User } from '../user';
+import { UserAuth } from '../userAuth';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +11,11 @@ import { RouterService } from '../router.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private route: RouterService) { }
+  user: User = new User();
+  userauth: UserAuth = new UserAuth();
+
+  constructor(private route: RouterService) {
+  }
 
   ngOnInit(): void {
   }
@@ -18,8 +24,7 @@ export class SignupComponent implements OnInit {
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     name: new FormControl('', [Validators.required]),
-    mobile: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    image: new FormControl('')
+    mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
   })
 
   get email() {
@@ -32,29 +37,34 @@ export class SignupComponent implements OnInit {
     return this.loginForm.get('name');
   }
   get mobile() {
-    return this.loginForm.get('email');
+    return this.loginForm.get('mobile');
   }
 
   signIn() {
-    console.log(this.loginForm.value);
-    console.log(this.loginForm.value.image);
+    this.user.mobile = this.loginForm.value.mobile;
+    this.user.username = this.loginForm.value.email;
+    this.user.name = this.loginForm.value.name;
+    this.userauth.username = this.loginForm.value.email;
+    this.userauth.password = this.loginForm.value.password;
+    console.log(this.user);
+    console.log(this.userauth);   
   }
+
   tologin() {
     this.route.tologin();
   }
-  
+
+  loadimage(){
+    
+  }  
+
   onFileChanged(event) {
-    let me = this;
-    let file = event.target.files[0];
-    let reader = new FileReader();
+    const file = event.target.files[0];
+    var reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = function () {
-      //me.modelvalue = reader.result;
-      console.log(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log('Error: ', error);
-    };
+    reader.onload = (_event => {
+      this.user.image = reader.result.toString();
+    })
   }
 
 

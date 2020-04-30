@@ -29,7 +29,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class UserAuthController {
 	
 	// Defining expiry time of the JWTtoken in milliseconds
-	long expireTime = 600000;
+	long expireTime = 1200000;
 	
 	@Autowired
 	private UserService userService;

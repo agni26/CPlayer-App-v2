@@ -1,7 +1,5 @@
 package cplayer.user.app.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +26,8 @@ public class UserController {
 
 	@GetMapping
 	public ResponseEntity<?> getUser(@RequestParam("username") String username) {
-		Optional<User> user = userService.getUser(username);
-		if (userService.getUser(username).isPresent()) {
+		User user = userService.getUser(username);
+		if (userService.getUser(username) != null) {
 			return new ResponseEntity<>(user, HttpStatus.CREATED);
 		} else
 			return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
@@ -54,7 +52,7 @@ public class UserController {
 		if (userService.deleteUser(username)) {
 			return new ResponseEntity<String>("ok", HttpStatus.OK);
 		} else
-			return new ResponseEntity<String>("no", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("no", HttpStatus.CONFLICT);
 	}
 
 	@PostMapping
@@ -62,7 +60,7 @@ public class UserController {
 		if (userService.addUser(user)) {
 			return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 		} else
-			return new ResponseEntity<String>("no", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("no", HttpStatus.CONFLICT);
 	}
 
 }

@@ -1,12 +1,12 @@
 .col{
-    background-color: rgba(36, 15, 70, 0.795);
+    background-color: rgba(0, 0, 0, 0.664);
     height: 100px;
 }
 .name{
     margin-top: 28px;
     margin-right: 10px;
     font-style: italic;
-    color: rgba(255, 199, 199, 0.801);
+    color:white;
     font-size: 52px;
 }
 
@@ -15,14 +15,14 @@
     position: absolute;
     right: 30px;
     margin-top: 9px;
-    color: rgba(255, 199, 199, 0.801);
+    color:white;
 }
 .signup{
     font-size: 22px;
     position: absolute;
     right: 170px;
     margin-top: 9px;
-    color: rgba(255, 199, 199, 0.801);
+    color: white;
 }
 img{
     height: 105px;
