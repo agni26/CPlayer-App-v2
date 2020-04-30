@@ -1,0 +1,28 @@
+<div class="login"> Login Form</div>
+<form [formGroup]="loginForm" (ngSubmit)="signIn()">
+    <div>
+        <label for="email">Email</label>
+        <input type="text" placeholder="enter email" formControlName="email">
+        <small *ngIf="email.invalid && (email.dirty || email.touched)">
+            email is mandatory field
+        </small>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" placeholder="enter password" formControlName="password">
+        <small *ngIf="password.invalid && (password.dirty || password.touched)">
+            <small *ngIf="password.errors.required">
+                password cannot be left blank
+            </small>
+            <small *ngIf="password.errors.minlength">
+                password must have minimum 8characters
+            </small>
+        </small>
+    </div>
+
+    <div class="but">
+        <button value="sign In">Log In</button>
+        <!--input class="submit"[disabled} = "!loginForm.valid" value="signIn"-->
+        <button value="sign In">New User</button>
+    </div>
+</form>

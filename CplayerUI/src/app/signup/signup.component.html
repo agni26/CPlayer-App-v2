@@ -1,0 +1,30 @@
+<div class="container ">
+    <h1 class="alert aalert-primary m-3 ">Signup Form</h1>
+    
+<form #signup = "ngForm" (ngSubmit)="signupData(signup)" >
+    <div class="form-group text-center">
+        <label for="Name">Username</label>
+        <input type="text" class="form-control" placeholder="Name"
+         [(ngModel)] = "user.Name"  name="Name" #Name="ngModel" minlength="5" required>
+    </div>
+    <div class="form-group text-center">
+      <label for="exampleInputEmail1 text-center">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" 
+      [(ngModel)] = "user.email"   name="email" #email="ngModel" minlength="8" required>
+      <small id="emailHelp" class="form-text text-muted"></small>
+    </div>
+    <div class="form-group text-center">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" 
+      [(ngModel)] = "user.password" name="password"  #password="ngModel" minlength="6" required>
+    
+    </div >
+    
+   <div class="submit form-group " >
+    <button type="Signup"  class="btn btn-primary">Signnup</button >
+   </div>
+   <div class="submit form-groupp">
+      <button type="already signin" class="btn btn-primary "  >Already Signup</button >
+      </div>
+  </form>
+  </div>
