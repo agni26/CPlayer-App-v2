@@ -38,7 +38,10 @@ export class DashboardComponent implements OnInit{
 
     this.userser.getdetails(name,token).subscribe(
       res => this.user=res,
-      err => console.log(err)
+      err => {
+        sessionStorage.clear();
+        this.route.tologin();
+      }
     )
 
   }

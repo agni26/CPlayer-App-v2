@@ -1,1 +1,38 @@
-<p>search works!</p>
+<div class="formTaker-Expansion">
+   <mat-form-field appearance="outline">
+      <mat-label>Search Player</mat-label>
+      <input matInput placeholder="Please enter Name" [(ngModel)]="val">
+      <mat-hint>eg. Sachin</mat-hint>
+   </mat-form-field>
+
+   <button mat-raised-button (click)="getData(val)" class="buttn" color="primary">Search</button>
+</div>
+
+<div class="cardContainer">
+
+   <mat-card class="card" *ngFor="let data of list | paginate: config">
+
+      <mat-card-subtitle>
+         Name : {{data.name}}
+      </mat-card-subtitle>
+
+      <mat-card-content>
+         Full Name : {{data.fullName}}
+      </mat-card-content>
+
+      <mat-card-actions>
+         <button *ngIf="status" mat-icon-button class="button-pos" (click)="addToFav(data.pid)">
+           <mat-icon>favorite</mat-icon>
+         </button>
+   
+         <button *ngIf="!status" mat-icon-button color="warn" class="button-pos"
+           (click)="removeFromFav(data.pid)">
+           <mat-icon>favorite</mat-icon>
+         </button>
+       </mat-card-actions>
+   </mat-card>
+</div>
+
+<div class="pagination">
+   <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
