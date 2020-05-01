@@ -11,11 +11,10 @@
       <a mat-button routerLink="recom"> Recommended </a>
       <a mat-button routerLink="stats"> Statistics </a>
       <a mat-button routerLink="cal"> Upcoming Matches </a>
-      <a mat-button routerLink="venue"> Venues </a>
       <a mat-button routerLink="contact"> Contact Us </a>
     </div>
     <div class="dropdown">
-      <img class="img" src="../../assets/ground.jpeg" width="60" height="55">
+      <img class="img" src={{user.image}} width="55" height="55">
       <div class="dropdown-content">
         <a class="drop" mat-button routerLink="edit"> Edit Profile </a><br>
         <a class="drop" mat-button (click)="logout()"> Log Out </a>
@@ -33,7 +32,6 @@
       <a mat-list-item routerLink="recom"> Recommended </a>
       <a mat-list-item routerLink="stats"> Statistics </a>
       <a mat-list-item routerLink="cal"> Upcoming Matches </a>
-      <a mat-list-item routerLink="venue"> Venues </a>
       <a mat-list-item routerLink="contact"> Contact Us </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -48,10 +46,10 @@
 <mat-toolbar class="foot" color="primary">
   <mat-toolbar-row>
     <div class="foot-text">Follow us on : </div>
-      <img class="icons" src="../../assets/fb.png">
-      <img class="icons" src="../../assets/insta.png">
-      <img class="icons" src="../../assets/linkedin.png">
-      <img class="icons" src="../../assets/twitter.png">
+    <a href="https://www.facebook.com/" target="_blank"><img class="icons" src="../../assets/fb.png"></a>
+    <a href="https://www.instagram.com/" target="_blank"><img class="icons" src="../../assets/insta.png"></a>
+    <a href="https://www.linkedin.com/" target="_blank"><img class="icons" src="../../assets/linkedin.png"></a>
+    <a href="https://www.twitter.com/" target="_blank"><img class="icons" src="../../assets/twitter.png"></a>
       <div class="copy">@Copyrights 2020 StackRoute. All rights reserved</div>
   </mat-toolbar-row>
 </mat-toolbar>

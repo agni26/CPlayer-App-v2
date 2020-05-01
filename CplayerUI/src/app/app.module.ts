@@ -37,7 +37,6 @@ import { ContactComponent } from './contact/contact.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { RecomComponent } from './recom/recom.component';
-import { VenueComponent } from './venue/venue.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,6 @@ import { VenueComponent } from './venue/venue.component';
     SignupComponent,
     ContactComponent,
     RecomComponent,
-    VenueComponent
   ],
   imports: [
     BrowserModule,

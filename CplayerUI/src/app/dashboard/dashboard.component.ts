@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterService } from '../router.service';
 import { AuthenticationService } from '../authentication.service';
+import { UserService } from '../user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,18 +14,33 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class DashboardComponent implements OnInit{
 
+  user: User = new User();
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private route: RouterService, private auth : AuthenticationService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private route: RouterService,
+     private auth : AuthenticationService, private userser :UserService) {}
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('username') == null) {
+    if (sessionStorage.getItem('token') == null || sessionStorage.getItem('username') == null) {
       this.route.tologin();
     }
+    var name:string = sessionStorage.getItem('username');
+    var token:string = sessionStorage.getItem('token');
+
+    console.log(name);
+    console.log(token);
+    
+
+    this.userser.getdetails(name,token).subscribe(
+      res => this.user=res,
+      err => console.log(err)
+    )
+
   }
 
   logout(){

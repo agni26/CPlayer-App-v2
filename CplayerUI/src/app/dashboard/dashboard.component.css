@@ -17,6 +17,7 @@
 .dropdown {
   position: absolute;
   right: 48px;
+  top: 13px;
 }
 
 .dropdown-content {
