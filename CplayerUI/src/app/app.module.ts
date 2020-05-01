@@ -34,6 +34,10 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { SignupComponent } from './signup/signup.component';
 import { ContactComponent } from './contact/contact.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { RecomComponent } from './recom/recom.component';
+import { VenueComponent } from './venue/venue.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,9 @@ import { ContactComponent } from './contact/contact.component';
     CalendarComponent,
     ReviewsComponent,
     SignupComponent,
-    ContactComponent
+    ContactComponent,
+    RecomComponent,
+    VenueComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +78,9 @@ import { ContactComponent } from './contact/contact.component';
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatGridListModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

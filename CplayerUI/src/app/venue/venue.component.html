@@ -1,21 +1,23 @@
-<div class="cardContainer">
+<!-- <div class="cardContainer">
 
-   <mat-card class="card" *ngFor="let data of array | paginate: config">
+   <mat-card class="card" *ngFor="let data of Collections | paginate: config">
      <mat-card-header>
        <mat-card-title>
-         {{data["team-1"]}} vs {{data["team-2"]}}
+         {{array.name}}
        </mat-card-title>
      </mat-card-header>
      <mat-card-subtitle>
-       Date :  {{data.date}}
+      {{array.city}}
      </mat-card-subtitle>
-
+ 
+     <img mat-card-image src={{array.image_path}}>
+ 
      <mat-card-content>
-      Format : {{data.type}}
+       Capacity : {{data.capacity}}
      </mat-card-content>
    </mat-card>
  
  </div>
  <div class="pagination">
    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
- </div>
+ </div> -->

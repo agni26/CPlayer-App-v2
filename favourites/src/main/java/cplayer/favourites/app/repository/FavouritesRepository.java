@@ -13,8 +13,4 @@ public interface FavouritesRepository extends CrudRepository<Favourites, Integer
 	@Query("select f from Favourites f where f.username= ?1")
 	List<Favourites> findByUsername(String username);
 
-	@Modifying
-	@Query("delete from Favourites f where f.username= ?1")
-	int deleteByUsername(String username);
-
 } // Player data stored in repository is accessed.

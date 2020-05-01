@@ -20,4 +20,7 @@ export class RouterService {
   tocontact(){
     this.router.navigate(["/contact"])
   }
+  tofav(){
+    this.router.navigate(["/favs"])
+  }
 }

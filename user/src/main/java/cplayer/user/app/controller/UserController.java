@@ -24,7 +24,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping
+	@GetMapping("/pro/token")
 	public ResponseEntity<?> getUser(@RequestParam("username") String username) {
 		User user = userService.getUser(username);
 		if (userService.getUser(username) != null) {
@@ -34,7 +34,7 @@ public class UserController {
 
 	}
 
-	@PutMapping
+	@PutMapping("/pro/token")
 	public ResponseEntity<?> updateUser(@RequestBody User user, @RequestParam("username") String username) {
 		try {
 			if (userService.updateUser(user, username)) {
@@ -47,7 +47,7 @@ public class UserController {
 
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/pro/token")
 	public ResponseEntity<?> delUser(@RequestParam("username") String username) {
 		if (userService.deleteUser(username)) {
 			return new ResponseEntity<String>("ok", HttpStatus.OK);

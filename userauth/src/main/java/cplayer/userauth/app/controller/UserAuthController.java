@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,7 +56,7 @@ public class UserAuthController {
 	 * If deleted successfully returning status as OK (200)
 	 * Otherwise returning status as NOT_FOUND (404)
 	 */
-	@DeleteMapping
+	@DeleteMapping("/pro/user")
 	public ResponseEntity<String> delUser(@RequestParam String username){
 		if(userService.deleteUser(username)) {
 			return new ResponseEntity<String>("ok", HttpStatus.OK);
@@ -70,13 +71,20 @@ public class UserAuthController {
 	 * If updated successfully returning status as OK (200)
 	 * Otherwise returning status as NOT_FOUND (404)
 	 */
-	@PutMapping
+	@PutMapping("/pro/user")
 	public ResponseEntity<String> update(@RequestBody Map<String, String> json){
 		if(userService.updateUser(json.get("username"), json.get("oldpass"), json.get("newpass"))) {
 			return new ResponseEntity<String>("ok", HttpStatus.OK);
 		}
 		else return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
-
+	}
+	
+	@GetMapping("pro/user")
+	public ResponseEntity<String> checkauth(@RequestParam String username){
+		if(userService.check(username)) {
+			return new ResponseEntity<String>("ok", HttpStatus.OK);
+		}
+		else return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
 	}
 	
 	/*

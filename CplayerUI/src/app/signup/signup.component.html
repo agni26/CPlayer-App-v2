@@ -1,3 +1,10 @@
+<mat-toolbar color="primary">
+   <mat-toolbar-row>
+       <div class="heading">Cricket Player</div>
+       <span class="menu-spacer"></span>
+   </mat-toolbar-row>
+</mat-toolbar>
+
 <div class="signup">Sign Up Form</div>
 <form [formGroup]="loginForm" (ngSubmit)="signIn()">
    <div>
@@ -45,6 +52,17 @@
    <div class="but">
       <button value="sign Up">Sign Up</button>
       <!--input class="submit"[disabled} = "!loginForm.valid" value="signIn"-->
-      <button (click)="tologin()" value="sign In">New User</button>
+      <button (click)="tologin()" value="log In">Already Registered</button>
    </div>
 </form>
+
+<mat-toolbar class="foot" color="primary">
+   <mat-toolbar-row>
+       <div class="foot-text">Follow us on : </div>
+       <img class="icons" src="../../assets/fb.png">
+       <img class="icons" src="../../assets/insta.png">
+       <img class="icons" src="../../assets/linkedin.png">
+       <img class="icons" src="../../assets/twitter.png">
+       <div class="copy">@Copyrights 2020 StackRoute. All rights reserved</div>
+   </mat-toolbar-row>
+</mat-toolbar>

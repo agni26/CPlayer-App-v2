@@ -1,1 +1,57 @@
-<p>dashboard works!</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <div class="heading">Cricket Player</div>
+    <span class="menu-spacer"></span>
+    <div class="top">
+      <a mat-button routerLink="search"> Search Player </a>
+      <a mat-button routerLink="favs"> Favourites </a>
+      <a mat-button routerLink="recom"> Recommended </a>
+      <a mat-button routerLink="stats"> Statistics </a>
+      <a mat-button routerLink="cal"> Upcoming Matches </a>
+      <a mat-button routerLink="venue"> Venues </a>
+      <a mat-button routerLink="contact"> Contact Us </a>
+    </div>
+    <div class="dropdown">
+      <img class="img" src="../../assets/ground.jpeg" width="60" height="55">
+      <div class="dropdown-content">
+        <a class="drop" mat-button routerLink="edit"> Edit Profile </a><br>
+        <a class="drop" mat-button (click)="logout()"> Log Out </a>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list class="side">
+      <a mat-list-item routerLink=""> Search Player </a>
+      <a mat-list-item routerLink="favs"> Favourites </a>
+      <a mat-list-item routerLink="recom"> Recommended </a>
+      <a mat-list-item routerLink="stats"> Statistics </a>
+      <a mat-list-item routerLink="cal"> Upcoming Matches </a>
+      <a mat-list-item routerLink="venue"> Venues </a>
+      <a mat-list-item routerLink="contact"> Contact Us </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-toolbar class="foot" color="primary">
+  <mat-toolbar-row>
+    <div class="foot-text">Follow us on : </div>
+      <img class="icons" src="../../assets/fb.png">
+      <img class="icons" src="../../assets/insta.png">
+      <img class="icons" src="../../assets/linkedin.png">
+      <img class="icons" src="../../assets/twitter.png">
+      <div class="copy">@Copyrights 2020 StackRoute. All rights reserved</div>
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -84,4 +84,12 @@ public class UserServiceImpl implements UserService{
 		else return false;
 	}
 	
+	@Override
+	public boolean check(String username) {
+		if(userRepository.existsById(username)) {
+			return true;
+		}
+		return false;
+	}
+	
 }

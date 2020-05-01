@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterService } from '../router.service';
 import { User } from '../user';
 import { UserAuth } from '../userAuth';
+import { UserService } from '../user.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +16,7 @@ export class SignupComponent implements OnInit {
   user: User = new User();
   userauth: UserAuth = new UserAuth();
 
-  constructor(private route: RouterService) {
+  constructor(private route: RouterService, private userser: UserService, private auth: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -46,8 +48,15 @@ export class SignupComponent implements OnInit {
     this.user.name = this.loginForm.value.name;
     this.userauth.username = this.loginForm.value.email;
     this.userauth.password = this.loginForm.value.password;
-    console.log(this.user);
-    console.log(this.userauth);   
+    this.auth.signup(this.userauth).subscribe(
+      res => console.log(res),
+      err => console.log(err)
+    )
+    this.userser.signup(this.user).subscribe(
+      res => console.log(res),
+      err=> console.log(err) 
+    )
+    this.route.tologin();  
   }
 
   tologin() {

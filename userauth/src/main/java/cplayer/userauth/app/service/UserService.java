@@ -9,5 +9,6 @@ public interface UserService {
 	public boolean addUser(User u);
 	public boolean validate(String username,String password);
 	public boolean updateUser(String username, String oldpass, String newpass);
+	public boolean check(String username);
 
 }

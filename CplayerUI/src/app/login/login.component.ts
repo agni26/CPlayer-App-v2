@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { RouterService } from '../router.service';
+import { AuthenticationService } from '../authentication.service';
+import { UserAuth } from '../userAuth';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +11,17 @@ import { RouterService } from '../router.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private route : RouterService) { }
+
+  userAuth:UserAuth = new UserAuth();
+  loginflag: boolean;
+
+  constructor(private route : RouterService, private auth : AuthenticationService) { }
 
   ngOnInit(): void {
+    if (sessionStorage.getItem('key') != null) {
+      this.loginflag = true;
+      this.route.todashboard();
+    }
   }
 
   loginForm = new FormGroup({
@@ -29,7 +39,19 @@ export class LoginComponent implements OnInit {
   }
 
   logIn(){
-    console.log(this.loginForm.value);
+    this.userAuth.username = this.loginForm.value.email;
+    this.userAuth.password = this.loginForm.value.password;
+    console.log(this.userAuth);
+    
+    this.auth.login(this.userAuth).subscribe(
+      data => {
+          this.auth.setBearerToken(data["Token"]);
+          sessionStorage.setItem("username", this.loginForm.value.email);
+          this.route.todashboard();
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   tosignup(){

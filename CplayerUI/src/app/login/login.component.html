@@ -1,15 +1,22 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <div class="heading">Cricket Player</div>
+        <span class="menu-spacer"></span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
 <div class="login"> Login Form</div>
 <form [formGroup]="loginForm" (ngSubmit)="logIn()">
     <div>
         <label for="email">Email</label>
-        <input type="text" placeholder="enter email" formControlName="email">
-        <small *ngIf="email.invalid && (email.dirty || email.touched)">
+        <input type="text" placeholder="Enter Email" formControlName="email">
+        <small class="esmall" *ngIf="email.invalid && (email.dirty || email.touched)">
             email is mandatory field
         </small>
     </div>
     <div>
         <label for="password">Password</label>
-        <input type="password" placeholder="enter password" formControlName="password">
+        <input type="password" placeholder="Enter Password" formControlName="password">
         <small *ngIf="password.invalid && (password.dirty || password.touched)">
             <small *ngIf="password.errors.required">
                 password cannot be left blank
@@ -26,3 +33,14 @@
         <button (click)="tosignup()" value="signIn">New User</button>
     </div>
 </form>
+
+<mat-toolbar class="foot" color="primary">
+    <mat-toolbar-row>
+        <div class="foot-text">Follow us on : </div>
+        <img class="icons" src="../../assets/fb.png">
+        <img class="icons" src="../../assets/insta.png">
+        <img class="icons" src="../../assets/linkedin.png">
+        <img class="icons" src="../../assets/twitter.png">
+        <div class="copy">@Copyrights 2020 StackRoute. All rights reserved</div>
+    </mat-toolbar-row>
+</mat-toolbar>

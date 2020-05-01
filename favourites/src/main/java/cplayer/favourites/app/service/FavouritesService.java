@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
+
 import cplayer.favourites.app.model.Favourites;
 import cplayer.favourites.app.repository.FavouritesRepository;
 
@@ -29,7 +31,10 @@ public class FavouritesService {
 	
 	public boolean removeData(String username) {
 		try {
-			System.out.println(favouritesRepository.deleteByUsername(username));
+			List<Favourites> list = favouritesRepository.findByUsername(username);
+			for (Favourites temp : list) {
+	            favouritesRepository.deleteById(temp.getId());
+	        }
 			return true;
 		}catch(Exception e) {
 			System.out.println("no");
