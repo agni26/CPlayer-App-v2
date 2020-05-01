@@ -30,11 +30,7 @@ export class DashboardComponent implements OnInit{
       this.route.tologin();
     }
     var name:string = sessionStorage.getItem('username');
-    var token:string = sessionStorage.getItem('token');
-
-    console.log(name);
-    console.log(token);
-    
+    var token:string = sessionStorage.getItem('token');    
 
     this.userser.getdetails(name,token).subscribe(
       res => this.user=res,

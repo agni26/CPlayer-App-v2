@@ -19,7 +19,8 @@ public class Favourites {
 	private String majorTeams;     //Getting info about major teams to be stored as private
 	private String currentAge;     //Getting player currentAge to be stored as private
 	private String imageURL;       //Getting player imageURL to be stored as private
-	private String playingRole;    //Getting player role to be stored as private
+	private String playingRole;		//Getting player role to be stored as private
+	private boolean status;
 	
 	public int getPid() {
 		return pid;
@@ -28,24 +29,32 @@ public class Favourites {
 		this.pid = pid;
 	}
 	
-	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
 	public String getCountry() {
 		return country;
 	}
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 	public String getName() {
@@ -89,11 +98,12 @@ public class Favourites {
 	public void setPlayingRole(String playingRole) {
 		this.playingRole = playingRole;
 	}
+	
 	@Override
 	public String toString() {
 		return "Favourites [id=" + id + ", username=" + username + ", pid=" + pid + ", country=" + country + ", name="
 				+ name + ", fullName=" + fullName + ", majorTeams=" + majorTeams + ", currentAge=" + currentAge
-				+ ", imageURL=" + imageURL + ", playingRole=" + playingRole + "]";
+				+ ", imageURL=" + imageURL + ", playingRole=" + playingRole + ", status=" + status + "]";
 	}
-		
+			
 }

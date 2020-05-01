@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UserAuth } from './userAuth';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
@@ -12,18 +12,23 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient, private users: UserService) { }
 
-  signup(userauth: UserAuth): Observable<any>{
-    return this.httpClient.post<UserAuth>('http://localhost:8000/api/auth/register', userauth)
+  public signup(userauth: UserAuth): Observable<any> {
+    return this.httpClient.post<UserAuth>('http://localhost:8000/api/auth/register', userauth).pipe(
+      map(
+        userData => {
+          return userData;
+        }));
   }
 
   setBearerToken(token: string) {
     sessionStorage.setItem('token', token);
   }
+
   getBearerToken() {
     return sessionStorage.getItem('token');
   }
 
-  login(userinfo: UserAuth): Observable<any> {
+  public login(userinfo: UserAuth): Observable<any> {
     return this.httpClient.post<any>('http://localhost:8000/api/auth/login', userinfo).pipe(
       map(
         userData => {
@@ -31,10 +36,25 @@ export class AuthenticationService {
         }));
   }
 
-  isUserAuthenticated(token){
-    return this.httpClient.post('http://localhost:8000/api/auth/check', {}, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
-    })
+
+  public deleteUser(username: string, token: string): Observable<any> {
+    return this.httpClient.delete<any>(`http://localhost:8000/api/auth/pro/user?username=${username}`, {
+      headers: new HttpHeaders().set("Authorization", `Bearer ${token}`)
+    }).pipe(
+      map(
+        userData => {
+          return userData;
+        }));
+  }
+
+  public updateUser(user: UserAuth, pass: string, token: string): Observable<any> {
+    return this.httpClient.put<any>(`http://localhost:8000/api/auth/pro/user`,{"username":`${user.username}`,"oldpass":`${user.password}`,"newpass":`${pass}`} ,{
+      headers: new HttpHeaders().set("Authorization", `Bearer ${token}`)
+    }).pipe(
+      map(
+        userData => {
+          return userData;
+        }));
   }
 
 }

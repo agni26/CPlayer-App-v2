@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CricapiService } from '../cricapi.service';
+import { Find } from '../find';
+import { FavouritesService } from '../favourites.service';
+import { Favs } from '../fav';
+import { Recommended } from '../recommended';
+import { RecommendedService } from '../recommended.service';
 
 @Component({
   selector: 'app-search',
@@ -8,16 +13,18 @@ import { CricapiService } from '../cricapi.service';
 })
 export class SearchComponent implements OnInit {
 
-  status: boolean;
+  stat: boolean;
   config: any;
   val: string;
-  list: Array<any> = [];
+  fav: Favs;
+  recom: Recommended
+  list: Array<Find> = [];
 
-  constructor(private cricapi: CricapiService) {
+  constructor(private cricapi: CricapiService, private favser: FavouritesService, private recomser: RecommendedService) {
     this.val = "";
 
     this.config = {
-      itemsPerPage: 12,
+      itemsPerPage: 10,
       currentPage: 1,
       totalItems: this.list.length
     };
@@ -35,22 +42,48 @@ export class SearchComponent implements OnInit {
     this.cricapi.searchPlayer(val).subscribe(
       res => {
         this.list = res.data;
-        val = "";
+        for (let obj of this.list) {
+          obj.status = true;
+        }
       },
       err => {
         console.log(err)
       })
   }
 
-  addToFav(pid) {
-    this.status = false;
-    console.log(pid);
+  addToFav(data) {
+    data.status = false;
+    this.cricapi.statsPlayer(data.pid).subscribe(
+      res => {
+        this.fav = res;
+        this.recom = res;
+        this.fav.status = false;
+        this.fav.username = sessionStorage.getItem('username');
+        this.recomser.addData(this.recom, sessionStorage.getItem('token')).subscribe(
+          res => {
+            this.favser.addData(this.fav, sessionStorage.getItem('token'))
+          },
+          err => {
+            if (err.statusText === "OK") {
+              this.favser.addData(this.fav, sessionStorage.getItem('token')).subscribe(
+                res => console.log(res),
+                err => {
+                  if (err.statusText === "OK") {
+                    console.log("Success")
+                  }
+                })
+            }
+          })
+      },
+      err => console.log(err)
+
+    )
 
   }
 
-  removeFromFav(pid) {
-    this.status = true;
-    console.log(pid);
+  removeFromFav(data) {
+    data.status = true;
+    this.recomser.deleteData(data.pid, sessionStorage.getItem('token'))
   }
 
 }

@@ -1,5 +1,4 @@
-export class Favs {
-   username: string;
+export class Recommended {
    pid: number;
    country: string;
    name: string;
@@ -8,5 +7,4 @@ export class Favs {
    currentAge: string;
    imageURL: string;
    playingRole: string;
-   status: Boolean;
 }
