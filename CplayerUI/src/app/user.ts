@@ -4,3 +4,4 @@ export class User{
    image: string;
    mobile: string;
  }
+ // user model class

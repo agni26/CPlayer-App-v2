@@ -14,6 +14,7 @@ export class StatsComponent implements OnInit {
   list: Array<Find> = [];
 
   constructor(private cricapi: CricapiService, private route: RouterService) {
+    //pagination
     this.val = "";
     this.config = {
       itemsPerPage: 10,
@@ -23,14 +24,15 @@ export class StatsComponent implements OnInit {
 
   }
 
+  // note if the page is changed
   pageChanged(event) {
     this.config.currentPage = event;
   }
   ngOnInit() {
   }
 
+  // this method will search player by his name as privided in val
   getData(val) {
-    console.log(val);
     this.cricapi.searchPlayer(val).subscribe(
       res => {
         this.list = res.data;
@@ -43,6 +45,7 @@ export class StatsComponent implements OnInit {
       })
   }
 
+  // this method will redirect to stat Opener component by taking player id (pid) with it
   viewStats(data){
     this.route.tostatOpener(data.pid);
   }

@@ -8,10 +8,13 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+// service to implement the User authentication Backend Microservice and its api's
 export class AuthenticationService {
 
-  constructor(private httpClient: HttpClient, private users: UserService) { }
+  // dependency injection of HttpClient
+  constructor(private httpClient: HttpClient) { }
 
+  // Method to register a new user into the authentication database
   public signup(userauth: UserAuth): Observable<any> {
     return this.httpClient.post<UserAuth>('http://localhost:8000/api/auth/register', userauth).pipe(
       map(
@@ -20,14 +23,17 @@ export class AuthenticationService {
         }));
   }
 
+  // Method to set bearer token into Session Storage
   setBearerToken(token: string) {
     sessionStorage.setItem('token', token);
   }
 
+  // Method to get the bearer token from the Session Storage
   getBearerToken() {
     return sessionStorage.getItem('token');
   }
 
+  // Method to validate a user and create a JWT tokan for him
   public login(userinfo: UserAuth): Observable<any> {
     return this.httpClient.post<any>('http://localhost:8000/api/auth/login', userinfo).pipe(
       map(
@@ -36,7 +42,7 @@ export class AuthenticationService {
         }));
   }
 
-
+  // Method to delete user details of a particular user
   public deleteUser(username: string, token: string): Observable<any> {
     return this.httpClient.delete<any>(`http://localhost:8000/api/auth/pro/user?username=${username}`, {
       headers: new HttpHeaders().set("Authorization", `Bearer ${token}`)
@@ -47,6 +53,7 @@ export class AuthenticationService {
         }));
   }
 
+  // method to update the password of a particular user
   public updateUser(user: UserAuth, pass: string, token: string): Observable<any> {
     return this.httpClient.put<any>(`http://localhost:8000/api/auth/pro/user`,{"username":`${user.username}`,"oldpass":`${user.password}`,"newpass":`${pass}`} ,{
       headers: new HttpHeaders().set("Authorization", `Bearer ${token}`)

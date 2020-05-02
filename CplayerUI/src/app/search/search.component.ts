@@ -11,6 +11,8 @@ import { RecommendedService } from '../recommended.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
+
+// search player by name functionality
 export class SearchComponent implements OnInit {
 
   stat: boolean;
@@ -20,9 +22,10 @@ export class SearchComponent implements OnInit {
   recom: Recommended
   list: Array<Find> = [];
 
+  // Dependency Injection of cric api, fav service and recommended service
   constructor(private cricapi: CricapiService, private favser: FavouritesService, private recomser: RecommendedService) {
     this.val = "";
-
+    // paginantion
     this.config = {
       itemsPerPage: 10,
       currentPage: 1,
@@ -31,12 +34,14 @@ export class SearchComponent implements OnInit {
 
   }
 
+  // Page events are stored in config
   pageChanged(event) {
     this.config.currentPage = event;
   }
   ngOnInit() {
   }
 
+  // It will call cric api service and get list of players
   getData(val) {
     console.log(val);
     this.cricapi.searchPlayer(val).subscribe(
@@ -51,6 +56,7 @@ export class SearchComponent implements OnInit {
       })
   }
 
+  // it will add a player into recommended as well as the favourites by calling there respective services
   addToFav(data) {
     data.status = false;
     this.cricapi.statsPlayer(data.pid).subscribe(
@@ -76,11 +82,10 @@ export class SearchComponent implements OnInit {
           })
       },
       err => console.log(err)
-
     )
-
   }
 
+  // it will remove a player from recommended as well as the favourites by calling there respective services
   removeFromFav(data) {
     data.status = true;
     this.recomser.deleteData(data.pid, sessionStorage.getItem('token')).subscribe(

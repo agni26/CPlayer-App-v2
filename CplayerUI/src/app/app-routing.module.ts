@@ -12,57 +12,72 @@ import { RecomComponent } from './recom/recom.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { StatOpenerComponent } from './stat-opener/stat-opener.component';
 
+// declaring the routes here
 const routes: Routes = [
+  // making the login as the default path of the app
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   },
+  //path to load login component
   {
     path: 'login',
     component: LoginComponent
   },
+  // path to load the signup component
   {
     path: 'signup',
     component: SignupComponent
   },
+  // path to login the dashboard component
   {
     path: 'dashboard',
     component: DashboardComponent,
+    //once a user logs in he will be directed to login and will be able to access children paths
     children: [
+      // making search as the default path of dashboard
       {
         path: '',
         redirectTo: 'search',
         pathMatch: 'full'
       },
+      // path of search component
       {
         path: 'search',
         component: SearchComponent
       },
+      // path of stat component
       {
         path: 'stats',
         component: StatsComponent
       },
+      // path of favourites coomponent
       {
         path: 'favs',
         component: FavsComponent,
       },
+      // path of recommended component
       {
         path: 'recom',
         component: RecomComponent
       },
+      // path of calendar component
       {
         path: 'cal',
         component: CalendarComponent
       },
+      // path of edituser component
       {
         path: 'edit',
         component: EdituserComponent
       },
+      //path of contact(about us) component
       {
         path: 'contact',
         component: ContactComponent
       },
+      // path of stats opener with providin the pid of the player clicked
       {
         path: 'statOpener/:pid/view',
         component: StatOpenerComponent,

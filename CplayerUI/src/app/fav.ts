@@ -10,3 +10,4 @@ export class Favs {
    playingRole: string;
    status: Boolean;
 }
+// Model class to store the favourites with the attributes as mentioned above

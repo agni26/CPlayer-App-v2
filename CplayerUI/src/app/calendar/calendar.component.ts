@@ -18,7 +18,7 @@ export class CalendarComponent implements OnInit {
   //dependency injection of Services
   constructor(private breakpointObserver: BreakpointObserver,
     private cric: CricapiService) {
-
+    // paginantion
     this.config = {
       itemsPerPage: 12,
       currentPage: 1,
@@ -27,18 +27,20 @@ export class CalendarComponent implements OnInit {
 
   }
 
-  pageChanged(event) {
-    this.config.currentPage = event;
-  }
+//recording the change of page
+pageChanged(event) {
+  this.config.currentPage = event;
+}
 
-  ngOnInit(): void {
-    var i: number = 0;
+ngOnInit(): void {
+  var i: number = 0;
 
-    this.cric.matchcalendar().subscribe(
-      data => {
-        this.array = data.matches;
-      },
-      err => console.log(err)
-    )
-  }
+  // load the upcoming match list on initiation from cric api
+  this.cric.matchcalendar().subscribe(
+    data => {
+      this.array = data.matches;
+    },
+    err => console.log(err)
+  )
+}
 }

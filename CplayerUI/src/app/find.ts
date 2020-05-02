@@ -4,3 +4,4 @@ export class Find {
    fullName: string;
    status: boolean;
  }
+ // model class to save the data we are getting from search by name

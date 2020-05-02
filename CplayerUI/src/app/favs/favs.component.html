@@ -1,3 +1,5 @@
+<!-- display all the favourite players and have a button in each card to delete them -->
+
 <div class="cardContainer">
 
    <mat-card class="card" *ngFor="let data of list">
@@ -19,7 +21,7 @@
       </mat-card-content>
 
       <mat-card-actions>
-         <button *ngIf="data.status" mat-icon-button class="button-pos" (click)="addToFav(data)">
+         <button *ngIf="data.status" mat-icon-button class="button-pos">
             <mat-icon>favorite</mat-icon>
          </button>
 

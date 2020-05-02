@@ -10,14 +10,17 @@ import { CricapiService } from '../cricapi.service';
   templateUrl: './favs.component.html',
   styleUrls: ['./favs.component.css']
 })
+// favourite component will show favourite players and will have the option to remove Players from favs
 export class FavsComponent implements OnInit {
 
   list : Array<Favs>;
   fav: Favs;
   recom: Recommended
 
+  // dependency injection of required services
   constructor(private favser : FavouritesService, private recomser : RecommendedService, private cricapi : CricapiService) { }
 
+  // load all the favs of a particular user at the time of initialization
   ngOnInit(): void {
     this.favser.getData(sessionStorage.getItem('username'),sessionStorage.getItem('token')).subscribe(
       res => {
@@ -27,6 +30,7 @@ export class FavsComponent implements OnInit {
     )    
   }
 
+  // remove a player from favs of the particular user as well as send a decrease couter request to frontend
   removeFromFav(data){
     data.status = true;
     this.recomser.deleteData(data.pid, sessionStorage.getItem('token')).subscribe(
@@ -43,35 +47,6 @@ export class FavsComponent implements OnInit {
         }
       }
     )
-  }
-
-  addToFav(data){
-    data.status = false;
-    this.cricapi.statsPlayer(data.pid).subscribe(
-      res => {
-        this.fav = res;
-        this.recom = res;
-        this.fav.status = false;
-        this.fav.username = sessionStorage.getItem('username');
-        this.recomser.addData(this.recom, sessionStorage.getItem('token')).subscribe(
-          res => {
-            this.favser.addData(this.fav, sessionStorage.getItem('token'))
-          },
-          err => {
-            if (err.statusText === "OK") {
-              this.favser.addData(this.fav, sessionStorage.getItem('token')).subscribe(
-                res => console.log(res),
-                err => {
-                  if (err.statusText === "OK") {
-                    console.log("Success")
-                  }
-                })
-            }
-          })
-      },
-      err => console.log(err)
-
-    )    
   }
 
 }

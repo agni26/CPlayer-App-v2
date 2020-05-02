@@ -12,6 +12,7 @@ import { FavouritesService } from '../favourites.service';
   templateUrl: './edituser.component.html',
   styleUrls: ['./edituser.component.css']
 })
+// imlementation of all edit user functionalities
 export class EdituserComponent implements OnInit {
 
   token: string;
@@ -21,6 +22,7 @@ export class EdituserComponent implements OnInit {
   user: User = new User();
   userauth: UserAuth = new UserAuth();
 
+  // dependency injection of required services
   constructor(private route: RouterService, private userser: UserService,
      private auth: AuthenticationService, private favser : FavouritesService) { }
 
@@ -29,19 +31,22 @@ export class EdituserComponent implements OnInit {
     this.nam = sessionStorage.getItem('username');
     this.token = sessionStorage.getItem('token');
 
+    // get userdetails from DB at the time of initialization
     this.userser.getdetails(this.nam, this.token).subscribe(
       res => this.user = res,
       err => console.log(err)
     )
   }
 
+  // form validation of mobile fields
   mobileForm = new FormGroup({
     mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
   })
 
+  // form validation for password fields
   passwordForm = new FormGroup({
-    oldPassword: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    newPassword: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    oldPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
   })
 
   get mobile() {
@@ -56,6 +61,7 @@ export class EdituserComponent implements OnInit {
 
   img: string;
 
+  // method to change the browsed image of user into string
   onFileChanged(event) {
     const file = event.target.files[0];
     var reader = new FileReader();
@@ -65,6 +71,7 @@ export class EdituserComponent implements OnInit {
     })
   }
 
+  // method to change the image of the user
   image() {
     this.user.image = this.img;
     console.log(this.user);
@@ -79,6 +86,7 @@ export class EdituserComponent implements OnInit {
     )
   }
 
+  // method to make a request for changing the mobile number
   mobiles() {
     this.user.mobile = this.mobileForm.value.mobile;
     console.log(this.user);
@@ -95,6 +103,7 @@ export class EdituserComponent implements OnInit {
     )
   }
 
+  // method to take old and new pass and send a request to change the password
   password() {
     this.userauth.password = this.passwordForm.value.oldPassword;
     this.userauth.username = this.nam;
@@ -111,8 +120,8 @@ export class EdituserComponent implements OnInit {
     )
   }
 
+  // delete all user info from all the databases(user, userauth and favourites also)
   deleteUser(val){
-    console.log(val);
     this.userser.deleteUser(sessionStorage.getItem('username'),sessionStorage.getItem('token')).subscribe();
     this.auth.deleteUser(sessionStorage.getItem('username'),sessionStorage.getItem('token')).subscribe();
     this.favser.deleteData(sessionStorage.getItem('username'),sessionStorage.getItem('token')).subscribe();

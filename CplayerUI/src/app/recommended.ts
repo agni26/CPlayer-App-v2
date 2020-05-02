@@ -8,3 +8,5 @@ export class Recommended {
    imageURL: string;
    playingRole: string;
 }
+// model class of recommended with all the attributes,
+// which are to be stored in the backend

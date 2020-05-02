@@ -12,10 +12,11 @@ export class RecomComponent implements OnInit {
 
   constructor(private recomser: RecommendedService) { }
 
+  // get all the recommended data from our DB
   ngOnInit(): void {
     this.recomser.getData(sessionStorage.getItem('token')).subscribe(
       res => this.list = res
     )
-}
+  }
 
 }

@@ -29,7 +29,6 @@ import { FavsComponent } from './favs/favs.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { ReviewsComponent } from './reviews/reviews.component';
 import { SignupComponent } from './signup/signup.component';
 import { ContactComponent } from './contact/contact.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -48,7 +47,6 @@ import { StatviewComponent } from './statview/statview.component';
     EdituserComponent,
     DashboardComponent,
     CalendarComponent,
-    ReviewsComponent,
     SignupComponent,
     ContactComponent,
     RecomComponent,

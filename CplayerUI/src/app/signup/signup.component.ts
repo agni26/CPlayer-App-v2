@@ -16,12 +16,14 @@ export class SignupComponent implements OnInit {
   user: User = new User();
   userauth: UserAuth = new UserAuth();
 
+  // dependency injection of required seervices
   constructor(private route: RouterService, private userser: UserService, private auth: AuthenticationService) {
   }
 
   ngOnInit(): void {
   }
 
+  // Login form field validations 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -42,6 +44,7 @@ export class SignupComponent implements OnInit {
     return this.loginForm.get('mobile');
   }
 
+  // sign in by calling the user and userauth services
   signIn() {
     this.user.mobile = this.loginForm.value.mobile;
     this.user.username = this.loginForm.value.email;
@@ -59,14 +62,12 @@ export class SignupComponent implements OnInit {
     this.route.tologin();  
   }
 
+  // Route already registered user to login page
   tologin() {
     this.route.tologin();
-  }
-
-  loadimage(){
-    
   }  
 
+  // Load the image attached by the user and converting it into string
   onFileChanged(event) {
     const file = event.target.files[0];
     var reader = new FileReader();
@@ -75,6 +76,4 @@ export class SignupComponent implements OnInit {
       this.user.image = reader.result.toString();
     })
   }
-
-
 }

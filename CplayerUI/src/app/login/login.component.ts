@@ -9,21 +9,24 @@ import { UserAuth } from '../userAuth';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+// login form implementations
 export class LoginComponent implements OnInit {
-
 
   userAuth:UserAuth = new UserAuth();
   loginflag: boolean;
 
+  // dependency injection of required services
   constructor(private route : RouterService, private auth : AuthenticationService) { }
 
+  // checking if the token is already set
   ngOnInit(): void {
-    if (sessionStorage.getItem('key') != null) {
+    if (sessionStorage.getItem('token') != null) {
       this.loginflag = true;
       this.route.todashboard();
     }
   }
 
+  // form validation of input fields
   loginForm = new FormGroup({
     email : new FormControl('',[Validators.required]),
     password : new FormControl('',[Validators.required,Validators.minLength(8)])
@@ -38,6 +41,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
+  // Log in service is called and a token is generated which is stored in Session Storage
   logIn(){
     this.userAuth.username = this.loginForm.value.email;
     this.userAuth.password = this.loginForm.value.password;
@@ -54,6 +58,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  // redirect user to signup form if he is an already registered user
   tosignup(){
     this.route.tosignup();
   }

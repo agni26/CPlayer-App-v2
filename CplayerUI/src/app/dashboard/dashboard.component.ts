@@ -22,16 +22,19 @@ export class DashboardComponent implements OnInit{
       shareReplay()
     );
 
+  // dependency injection of required services
   constructor(private breakpointObserver: BreakpointObserver, private route: RouterService,
      private auth : AuthenticationService, private userser :UserService) {}
 
   ngOnInit(): void {
+    // check if the username and token are set, otherwise redirect to login page
     if (sessionStorage.getItem('token') == null || sessionStorage.getItem('username') == null) {
       this.route.tologin();
     }
     var name:string = sessionStorage.getItem('username');
     var token:string = sessionStorage.getItem('token');    
 
+    // if not able to fetch user details from database then logout
     this.userser.getdetails(name,token).subscribe(
       res => this.user=res,
       err => {
@@ -42,6 +45,7 @@ export class DashboardComponent implements OnInit{
 
   }
 
+  // log Out any logged in user 
   logout(){
     sessionStorage.clear();
     this.route.tologin();
