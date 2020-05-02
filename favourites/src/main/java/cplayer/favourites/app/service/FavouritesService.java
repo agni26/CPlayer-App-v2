@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
-
 import cplayer.favourites.app.model.Favourites;
 import cplayer.favourites.app.repository.FavouritesRepository;
 
@@ -22,6 +19,14 @@ public class FavouritesService {
 
 	public boolean addData(Favourites favs) {
 		try {
+			int pidnew = favs.getPid() ;
+			String usernamenew = favs.getUsername();
+			List<Favourites> list = (List<Favourites>) favouritesRepository.findAll();
+			for (Favourites temp : list) {
+				if((temp.getPid() == pidnew) && (temp.getUsername().equalsIgnoreCase(usernamenew))) {
+					return true;
+				}
+			}
 			favouritesRepository.save(favs);
 			return true;
 		} catch (Exception e) {

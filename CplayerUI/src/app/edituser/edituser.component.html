@@ -1,6 +1,6 @@
-<mat-tab-group class="main">
+<mat-tab-group>
 
-   <mat-tab label="Mobile Update">
+   <mat-tab class="main" label="Mobile Update">
       <div class="headers">Change Your Mobile Number</div>
       <form [formGroup]="mobileForm" (ngSubmit)="mobiles()">
          <div>
@@ -16,7 +16,7 @@
       </form>
    </mat-tab>
 
-   <mat-tab label="Image Update">
+   <mat-tab class="main" label="Image Update">
       <div class="headers">Change you Profile Picture</div>
       <form (ngSubmit)="image()">
          <div class="image-upload-container btn btn-bwm">
@@ -29,7 +29,7 @@
       </form>
    </mat-tab>
 
-   <mat-tab label="Password Update">
+   <mat-tab class="main" label="Password Update">
       <div class="headers">Change Your Password</div>
       <form [formGroup]="passwordForm" (ngSubmit)="password()">
          <div>
@@ -48,7 +48,8 @@
 
          <div>
             <label for="newPassord">New Password</label>
-            <input class="password" type="password" placeholder="  Enter new password" formControlName="newPassword"><br>
+            <input class="password" type="password" placeholder="  Enter new password"
+               formControlName="newPassword"><br>
             <small *ngIf="newPassword.invalid && (newPassword.dirty || newPassword.touched)">
                <small class="err" *ngIf="newPassword.errors.required">
                   Password cannot be left blank
@@ -63,6 +64,20 @@
             <button value="update">Update</button>
          </div>
       </form>
+   </mat-tab>
+
+   <mat-tab class="main" label="Delete Account">
+      <div class="delpa">
+         <div class="formTaker-Expansion">
+            <mat-form-field appearance="outline">
+               <mat-label>Delete Account</mat-label>
+               <input matInput placeholder="Please enter password" [(ngModel)]="val">
+               <mat-hint>We have new features coming</mat-hint>
+            </mat-form-field>
+
+            <button mat-raised-button (click)="deleteUser(val)" class="buttn" color="primary">Delete</button>
+         </div>
+      </div>
    </mat-tab>
 
 </mat-tab-group>

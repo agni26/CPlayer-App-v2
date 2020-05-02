@@ -13,11 +13,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   public signup(user: User) {
-    return this.httpClient.post<User>("http://localhost:8001/api/user", user).pipe(
-      map(
-        userData => {
-          return userData;
-        }));
+    return this.httpClient.post<User>("http://localhost:8001/api/user", user)
   }
 
   public getdetails(username: string, token: string): Observable<any> {

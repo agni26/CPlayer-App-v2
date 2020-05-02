@@ -1,1 +1,28 @@
-<p>stats works!</p>
+<div class="formTaker-Expansion">
+   <mat-form-field appearance="outline">
+      <mat-label>Get Statistics</mat-label>
+      <input matInput placeholder="Enter Name of Player" [(ngModel)]="val">
+      <mat-hint>eg. Sachin</mat-hint>
+   </mat-form-field>
+
+   <button mat-raised-button (click)="getData(val)" class="buttn" color="primary">Search</button>
+</div>
+
+<div class="cardContainer">
+
+   <mat-card class="card" *ngFor="let data of list | paginate: config" (click)="viewStats(data)">
+
+      <mat-card-subtitle>
+         Name : {{data.name}}
+      </mat-card-subtitle>
+
+      <mat-card-content>
+         Full Name : {{data.fullName}}
+      </mat-card-content>
+
+   </mat-card>
+</div>
+
+<div class="pagination">
+   <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>

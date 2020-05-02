@@ -35,6 +35,8 @@ import { ContactComponent } from './contact/contact.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { RecomComponent } from './recom/recom.component';
+import { StatOpenerComponent } from './stat-opener/stat-opener.component';
+import { StatviewComponent } from './statview/statview.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { RecomComponent } from './recom/recom.component';
     SignupComponent,
     ContactComponent,
     RecomComponent,
+    StatOpenerComponent,
+    StatviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +81,7 @@ import { RecomComponent } from './recom/recom.component';
     MatMenuModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents :[StatviewComponent]
 })
 export class AppModule { }

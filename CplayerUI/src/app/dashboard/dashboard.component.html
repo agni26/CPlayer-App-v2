@@ -26,7 +26,7 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-nav-list class="side">
-      <a mat-list-item routerLink=""> Search Player </a>
+      <a mat-list-item routerLink="search"> Search Player </a>
       <a mat-list-item routerLink="favs"> Favourites </a>
       <a mat-list-item routerLink="recom"> Recommended </a>
       <a mat-list-item routerLink="stats"> Statistics </a>
@@ -38,6 +38,8 @@
     <div style="height: 88vh;">
 
       <router-outlet></router-outlet>
+      <router-outlet name='statOpener'></router-outlet>
+
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

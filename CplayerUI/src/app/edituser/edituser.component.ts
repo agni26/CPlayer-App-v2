@@ -5,6 +5,7 @@ import { UserAuth } from '../userAuth';
 import { AuthenticationService } from '../authentication.service';
 import { UserService } from '../user.service';
 import { RouterService } from '../router.service';
+import { FavouritesService } from '../favourites.service';
 
 @Component({
   selector: 'app-edituser',
@@ -15,11 +16,13 @@ export class EdituserComponent implements OnInit {
 
   token: string;
   nam: string;
+  val: string;
 
   user: User = new User();
   userauth: UserAuth = new UserAuth();
 
-  constructor(private route: RouterService, private userser: UserService, private auth: AuthenticationService) { }
+  constructor(private route: RouterService, private userser: UserService,
+     private auth: AuthenticationService, private favser : FavouritesService) { }
 
   ngOnInit(): void {
 
@@ -106,6 +109,15 @@ export class EdituserComponent implements OnInit {
         }
       }
     )
+  }
+
+  deleteUser(val){
+    console.log(val);
+    this.userser.deleteUser(sessionStorage.getItem('username'),sessionStorage.getItem('token')).subscribe();
+    this.auth.deleteUser(sessionStorage.getItem('username'),sessionStorage.getItem('token')).subscribe();
+    this.favser.deleteData(sessionStorage.getItem('username'),sessionStorage.getItem('token')).subscribe();
+    sessionStorage.clear();
+    this.route.tologin();
   }
 
 }
