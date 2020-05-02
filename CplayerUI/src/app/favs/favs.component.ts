@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FavouritesService } from '../favourites.service';
+import { Favs } from '../fav';
 
 @Component({
   selector: 'app-favs',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavsComponent implements OnInit {
 
-  constructor() { }
+  list : Array<Favs>;
+
+  constructor(private favser : FavouritesService) { }
 
   ngOnInit(): void {
+    this.favser.getData(sessionStorage.getItem('username'),sessionStorage.getItem('token')).subscribe(
+      res => {
+        this.list = res;
+      },
+      err => console.log(err)
+    )    
+  }
+
+  removeFromFav(data){
+    console.log("removed");
+  }
+
+  addToFav(data){
+    console.log("added");
+    
   }
 
 }

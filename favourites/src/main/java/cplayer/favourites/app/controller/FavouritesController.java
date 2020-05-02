@@ -1,6 +1,7 @@
 package cplayer.favourites.app.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,9 +44,15 @@ public class FavouritesController {
 	}
 	
 	
-	@DeleteMapping      //maps  HTTP DELETE requests onto specific handler methods
-	public ResponseEntity<String> deleteData(@RequestParam("username") String username){
+	@DeleteMapping             // maps  HTTP DELETE requests onto specific handler methods
+	public ResponseEntity<String> deleteallData(@RequestParam("username") String username){
 		favouritesService.removeData(username);
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
+	
+	@PostMapping("id")      // maps  HTTP DELETE requests onto specific handler methods 
+	public ResponseEntity<String> deleteData(@RequestBody Map<String, String> json){
+		favouritesService.removeUserData(json.get("username"), Integer.parseInt(json.get("pid")));
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 

@@ -12,10 +12,10 @@ import cplayer.favourites.app.repository.FavouritesRepository;
 
 @Service
 public class FavouritesService {
-	
+
 	@Autowired
 	private FavouritesRepository favouritesRepository;
-	
+
 	public List<Favourites> getAllData(String username) {
 		return (List<Favourites>) favouritesRepository.findByUsername(username);
 	}
@@ -24,21 +24,37 @@ public class FavouritesService {
 		try {
 			favouritesRepository.save(favs);
 			return true;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
-	}	
-	
+	}
+
 	public boolean removeData(String username) {
 		try {
 			List<Favourites> list = favouritesRepository.findByUsername(username);
 			for (Favourites temp : list) {
-	            favouritesRepository.deleteById(temp.getId());
-	        }
+				favouritesRepository.deleteById(temp.getId());
+			}
 			return true;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("no");
 			return false;
 		}
-	}		
+	}
+
+	public boolean removeUserData(String username, int pid) {
+		try {
+			List<Favourites> list = favouritesRepository.findByUsername(username);
+			for(Favourites temp : list ) {
+				if(temp.getPid() == pid) {
+					favouritesRepository.deleteById(temp.getId());
+					return true;
+				}
+			}
+			return false;	
+		}catch (Exception e) {
+			return false;
+		}
+	}
+
 }

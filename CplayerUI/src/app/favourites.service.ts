@@ -41,4 +41,14 @@ export class FavouritesService {
         }));
   }
 
+  deleteDataUser(usern: string, pid: number, token: string): Observable<any> {
+    return this.http.post<any>(`http://localhost:8002/api/fav/id`, { "username": `${usern}`, "pid": `${pid}` }, {
+      headers: new HttpHeaders().set("Authorization", `Bearer ${token}`)
+    }).pipe(
+      map(
+        userData => {
+          return userData;
+        }));
+  }
+
 }

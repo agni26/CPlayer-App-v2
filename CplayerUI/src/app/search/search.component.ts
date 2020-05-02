@@ -83,7 +83,20 @@ export class SearchComponent implements OnInit {
 
   removeFromFav(data) {
     data.status = true;
-    this.recomser.deleteData(data.pid, sessionStorage.getItem('token'))
+    this.recomser.deleteData(data.pid, sessionStorage.getItem('token')).subscribe(
+      res => this.favser.deleteDataUser(sessionStorage.getItem('username'), data.pid, sessionStorage.getItem('token')).subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      ),
+      err => {
+        if (err.statusText === "OK") {
+          this.favser.deleteDataUser(sessionStorage.getItem('username'), data.pid, sessionStorage.getItem('token')).subscribe(
+            res => console.log("deleted"),
+            err => console.log(err)
+          )
+        }
+      }
+    )
   }
 
 }
