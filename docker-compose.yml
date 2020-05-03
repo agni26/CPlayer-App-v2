@@ -1,0 +1,68 @@
+--- 
+services: 
+  angular: 
+    build: CplayerUI
+    container_name: angular-docker
+    image: angular-app
+    network_mode: host
+    ports: 
+      - "4200:4200"
+  user-mongo: 
+    environment: 
+      MONGO_DATABASE: cplayerapp
+      MONGO_HOST: localhost
+      MONGO_PORT: 27017
+    image: mongo
+    network_mode: host
+    ports: 
+      - "27017:27017"
+  user-mysql: 
+    environment: 
+      MYSQL_DATABASE: Cplayerdb
+      MYSQL_HOST: localhost
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    image: "mysql:5.7"
+    network_mode: host
+    ports: 
+      - "3306:3306"
+  webapp1: 
+    build: 
+      context: webapp1/
+    depends_on: 
+      - user-mysql
+    image: webapp1
+    network_mode: host
+    ports: 
+      - "8000:8000"
+    restart: always
+  webapp2: 
+    build: 
+      context: webapp2/
+    depends_on: 
+      - user-mysql
+    image: webapp2
+    network_mode: host
+    ports: 
+      - "8002:8002"
+    restart: always
+  webapp3: 
+    build: 
+      context: webapp3/
+    depends_on: 
+      - user-mongo
+    image: webapp3
+    network_mode: host
+    ports: 
+      - "8001:8001"
+    restart: always
+  webapp4: 
+    build: 
+      context: webapp4/
+    depends_on: 
+      - user-mongo
+    image: webapp4
+    network_mode: host
+    ports: 
+      - "8003:8003"
+    restart: always
