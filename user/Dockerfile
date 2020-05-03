@@ -1,4 +1,4 @@
-#favourite DockerFile
+#user DockerFile
 
 FROM java:8-jre
 COPY ./target/user-0.0.1-SNAPSHOT.jar

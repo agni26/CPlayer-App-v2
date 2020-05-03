@@ -1,4 +1,4 @@
-#favourite DockerFile
+#recommended DockerFile
 
 FROM java:8-jre
 COPY ./target/recommended-0.0.1-SNAPSHOT.jar
