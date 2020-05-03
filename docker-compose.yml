@@ -1,4 +1,5 @@
 --- 
+version: "3"
 services: 
   angular: 
     build: CplayerUI
@@ -7,6 +8,26 @@ services:
     network_mode: host
     ports: 
       - "4200:4200"
+  favourite-service: 
+    build: 
+      context: favourite-service/
+    depends_on: 
+      - user-mysql
+    image: webapp2
+    network_mode: host
+    ports: 
+      - "8002:8002"
+    restart: always
+  recommended-service: 
+    build: 
+      context: recommended-service/
+    depends_on: 
+      - user-mongo
+    image: webapp4
+    network_mode: host
+    ports: 
+      - "8003:8003"
+    restart: always
   user-mongo: 
     environment: 
       MONGO_DATABASE: cplayerapp
@@ -26,29 +47,9 @@ services:
     network_mode: host
     ports: 
       - "3306:3306"
-  webapp1: 
+  user-service: 
     build: 
-      context: webapp1/
-    depends_on: 
-      - user-mysql
-    image: webapp1
-    network_mode: host
-    ports: 
-      - "8000:8000"
-    restart: always
-  webapp2: 
-    build: 
-      context: webapp2/
-    depends_on: 
-      - user-mysql
-    image: webapp2
-    network_mode: host
-    ports: 
-      - "8002:8002"
-    restart: always
-  webapp3: 
-    build: 
-      context: webapp3/
+      context: user-service/
     depends_on: 
       - user-mongo
     image: webapp3
@@ -56,13 +57,14 @@ services:
     ports: 
       - "8001:8001"
     restart: always
-  webapp4: 
+  userAuth-service: 
     build: 
-      context: webapp4/
+      context: userAuth-service/
     depends_on: 
-      - user-mongo
-    image: webapp4
+      - user-mysql
+    image: webapp1
     network_mode: host
     ports: 
-      - "8003:8003"
+      - "8000:8000"
     restart: always
+
