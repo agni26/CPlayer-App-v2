@@ -38,14 +38,15 @@ public class UserAuthController {
 	 * http://localhost:8000/api/auth/register (Post)
 	 * End point for getting a user registered,
 	 * If registered successfully returning status as Created (201)
-	 * Otherwise returning status as Bad_REQUST (400)
+	 * Otherwise returning status as Conflict
 	 */
 	@PostMapping("register")
 	public ResponseEntity<String> registerUser(@RequestBody User user) {
-		if(userService.addUser(user)) {
+		boolean bool = userService.addUser(user);
+		if(bool) {
 			return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 		}
-		else return new ResponseEntity<String>("no", HttpStatus.BAD_REQUEST);
+		else return new ResponseEntity<String>("no", HttpStatus.CONFLICT);
 
 	}
 	

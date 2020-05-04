@@ -8,9 +8,10 @@ services:
     network_mode: host
     ports: 
       - "4200:4200"
-  favourite-service: 
+    restart: always
+  favourites: 
     build: 
-      context: favourite-service/
+      context: favourites/
     depends_on: 
       - user-mysql
     image: webapp2
@@ -18,9 +19,9 @@ services:
     ports: 
       - "8002:8002"
     restart: always
-  recommended-service: 
+  recommended: 
     build: 
-      context: recommended-service/
+      context: recommended/
     depends_on: 
       - user-mongo
     image: webapp4
@@ -41,15 +42,16 @@ services:
     environment: 
       MYSQL_DATABASE: Cplayerdb
       MYSQL_HOST: localhost
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     image: "mysql:5.7"
     network_mode: host
     ports: 
       - "3306:3306"
-  user-service: 
+  user: 
     build: 
-      context: user-service/
+      context: user/
     depends_on: 
       - user-mongo
     image: webapp3
@@ -57,9 +59,9 @@ services:
     ports: 
       - "8001:8001"
     restart: always
-  userAuth-service: 
+  userauth: 
     build: 
-      context: userAuth-service/
+      context: userauth/
     depends_on: 
       - user-mysql
     image: webapp1

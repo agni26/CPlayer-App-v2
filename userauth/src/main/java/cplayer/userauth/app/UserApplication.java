@@ -7,11 +7,12 @@ import org.springframework.context.annotation.Bean;
 
 import cplayer.userauth.config.JWTFilter;
 
+//configuration class that declares one or more @Bean methods and also triggers auto-configuration and component scanning
 // Spring Boot Application which will be used for the purpose of User Authentication
-
 @SpringBootApplication
 public class UserApplication {
 	
+	// Bean of JWT token for validating the JWT provided in header
 	@Bean
 	public FilterRegistrationBean jwtFilter() {
 		

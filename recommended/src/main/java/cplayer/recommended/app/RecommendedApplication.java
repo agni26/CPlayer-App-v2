@@ -7,9 +7,13 @@ import org.springframework.context.annotation.Bean;
 
 import cplayer.userauth.config.JWTFilter;
 
-@SpringBootApplication              //configuration class that declares one or more @Bean methods and also triggers auto-configuration and component scanning
+//configuration class that declares one or more @Bean methods and also triggers auto-configuration and component scanning
+// Spring boot application for the purpose of handling the recommended section
+@SpringBootApplication
 public class RecommendedApplication {
 	
+
+	// Bean of JWT token for validating the JWT provided in header
 	@Bean
 	public FilterRegistrationBean jwtFilter() {
 		

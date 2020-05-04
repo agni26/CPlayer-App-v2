@@ -26,30 +26,52 @@ public class FavouritesController {
 	@Autowired          //injecting the object dependency implicitly
 	private FavouritesService favouritesService;
 	 
+	/*
+	 * http://localhost:8000/api/fav (Get)
+	 * End point for getting list of all favorite players of a user from the DB
+	 * If retrieved data successfully returning status as OK
+	 * Otherwise returning status as Conflict
+	 */
 	@GetMapping         //GET requests onto specific handler methods.
 	public ResponseEntity<?> getAllPlayers(@RequestParam("username") String username) {
 		try {
 			return new ResponseEntity<List<Favourites>>(favouritesService.getAllData(username),HttpStatus.OK);
 		}catch (Exception e) {
-			return new ResponseEntity<String>("no",HttpStatus.OK);
+			return new ResponseEntity<String>("no",HttpStatus.CONFLICT);
 		}
 	}
 	
+	/*
+	 * http://localhost:8000/api/fav (Post)
+	 * End point for adding a favorite player in the DB
+	 * If added data successfully returning status as Created
+	 * Otherwise returning status as Conflict
+	 */
 	@PostMapping        //POST requests matched with given URL expression
 	public ResponseEntity<?> addData(@RequestBody Favourites favs) {
 		if(favouritesService.addData(favs)) {
 			return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 		}
-		else return new ResponseEntity<String>("no", HttpStatus.CREATED);
+		else return new ResponseEntity<String>("no", HttpStatus.CONFLICT);
 	}
 	
 	
+	/*
+	 * http://localhost:8000/api/fav (Delete)
+	 * End point for deleting all favorite players of a particular user in the DB
+	 * If deleted data successfully returning status as OK
+	 */
 	@DeleteMapping             // maps  HTTP DELETE requests onto specific handler methods
 	public ResponseEntity<String> deleteallData(@RequestParam("username") String username){
 		favouritesService.removeData(username);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
+	/*
+	 * http://localhost:8000/api/recom (Post)
+	 * End point for deleting a particular favorite player of a particular player from the DB
+	 * If deleted successfully returning status as OK
+	 */
 	@PostMapping("id")      // maps  HTTP DELETE requests onto specific handler methods 
 	public ResponseEntity<String> deleteData(@RequestBody Map<String, String> json){
 		favouritesService.removeUserData(json.get("username"), Integer.parseInt(json.get("pid")));

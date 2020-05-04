@@ -22,9 +22,16 @@ import cplayer.recommended.app.service.RecommendedService;
 @CrossOrigin(value = "*")               // This annotation marks the annotated method or type as permitting cross origin requests
 public class RecommendedController {
 
-	@Autowired                          //This can be used to autowire bean on the setter method 
+	//This can be used to Auto wire bean on the setter method
+	@Autowired 
 	private RecommendedService recommendedService;
 
+	/*
+	 * http://localhost:8000/api/recom (Get)
+	 * End point for getting list of all recommended players from the DB
+	 * If retrieved data successfully returning status as OK
+	 * Otherwise returning status as Not_Found
+	 */
 	@GetMapping                         //Annotation for mapping HTTP GET requests onto specific handler methods.
 	public ResponseEntity<?> getAllPlayers() {
 		try {
@@ -34,6 +41,12 @@ public class RecommendedController {
 		}
 	}
 
+	/*
+	 * http://localhost:8000/api/recom (Post)
+	 * End point for increasing the player recommended count by 1 in the DB
+	 * If increased successfully returning status as Created (201)
+	 * Otherwise returning status as Not_Found
+	 */
 	@PostMapping                        // @PostMapping is a composed annotation that acts as a shortcut for @RequestMapping
 	public ResponseEntity<String> addData(@RequestBody Recommended recoms) {
 		try {
@@ -46,6 +59,12 @@ public class RecommendedController {
 		}
 	}
 
+	/*
+	 * http://localhost:8000/api/recom (Delete)
+	 * End point for decreasing the count of a player from the DB
+	 * If decreased successfully returning status as Created (201)
+	 * Otherwise returning status as Not_found
+	 */
 	@DeleteMapping                     //@DeleteMapping to delete a resource
 	public ResponseEntity<String> deleteData(@RequestParam("id") int id) {
 		try {
