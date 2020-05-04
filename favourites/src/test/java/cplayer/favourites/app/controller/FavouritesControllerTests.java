@@ -1,9 +1,9 @@
-package cplayer.userauth.app.controller;
+package cplayer.favourites.app.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cplayer.userauth.app.model.User;
-import cplayer.userauth.app.service.UserService;
+import cplayer.favourites.app.model.Favourites;
+import cplayer.favourites.app.service.FavouritesService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,39 +26,52 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-public class UserAuthControllerTests {
+public class FavouritesControllerTests {
+	
     @Autowired
     private MockMvc mockMvc;
+    
     @MockBean
-    private User user;
+    private Favourites favourites;
+    
     @MockBean
-    UserService userService;
+    FavouritesService favouritesService;
+    
     @InjectMocks
-    UserAuthController userController;
+    FavouritesController favouritesController;
+    
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
-        user = new User();
-        user.setUsername("shivansh");
-        user.setPassword("password");
+        mockMvc = MockMvcBuilders.standaloneSetup(favouritesController).build();
+        favourites = new Favourites();
+		favourites.setPid(1234);
+		favourites.setName("Sachin");
+		favourites.setFullName("Sachin Tendulkar");
+		favourites.setCurrentAge("42 years");
+		favourites.setCountry("India");
+		favourites.setPlayingRole("Opener");
+		favourites.setMajorTeams("India, Mumbai Indians");
+		favourites.setImageURL("sampleimage.jpeg");
+		favourites.setUsername("shivaagn@in.ibm.com");
+		favourites.setStatus(true);
     }
     
     
     @Test
     public void registerUserSuccess() throws Exception  {
-        when(userService.addUser(any())).thenReturn(true);
-        mockMvc.perform(post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(user)))
+        when(favouritesService.addData(any())).thenReturn(true);
+        mockMvc.perform(post("/api/fav")
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(favourites)))
                 .andExpect(status().isCreated()).andDo(MockMvcResultHandlers.print());
     }
     
     
     @Test
     public void registerUserFailure() throws Exception {
-        when(userService.addUser(any())).thenReturn(false);
-        mockMvc.perform(post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(user)))
+        when(favouritesService.addData(any())).thenReturn(false);
+        mockMvc.perform(post("/api/fav")
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(favourites)))
                 .andExpect(status().isConflict()).andDo(MockMvcResultHandlers.print());
     }
    

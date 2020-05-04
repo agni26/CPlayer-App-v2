@@ -110,6 +110,8 @@ public class UserAuthController {
 		return new ResponseEntity<>(map,HttpStatus.OK);
 	}
 	
+	
+	
 	public String getToken(String username,String password) throws Exception {
 		
 		// If either of username or password field is empty it will throw exception

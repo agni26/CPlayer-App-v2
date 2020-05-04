@@ -30,14 +30,14 @@ public class RecommendedController {
 	 * http://localhost:8000/api/recom (Get)
 	 * End point for getting list of all recommended players from the DB
 	 * If retrieved data successfully returning status as OK
-	 * Otherwise returning status as Not_Found
+	 * Otherwise returning status as Conflict
 	 */
 	@GetMapping                         //Annotation for mapping HTTP GET requests onto specific handler methods.
 	public ResponseEntity<?> getAllPlayers() {
 		try {
 			return new ResponseEntity<List<Recommended>>(recommendedService.getAllData(), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("no", HttpStatus.CONFLICT);
 		}
 	}
 
@@ -45,7 +45,7 @@ public class RecommendedController {
 	 * http://localhost:8000/api/recom (Post)
 	 * End point for increasing the player recommended count by 1 in the DB
 	 * If increased successfully returning status as Created (201)
-	 * Otherwise returning status as Not_Found
+	 * Otherwise returning status as Conflict
 	 */
 	@PostMapping                        // @PostMapping is a composed annotation that acts as a shortcut for @RequestMapping
 	public ResponseEntity<String> addData(@RequestBody Recommended recoms) {
@@ -53,7 +53,7 @@ public class RecommendedController {
 			if (recommendedService.addData(recoms)) {
 				return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 			} else
-				return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
+				return new ResponseEntity<String>("no", HttpStatus.CONFLICT);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("no", HttpStatus.NOT_FOUND);
 		}

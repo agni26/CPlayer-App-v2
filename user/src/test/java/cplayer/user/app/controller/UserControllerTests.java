@@ -49,7 +49,7 @@ public class UserControllerTests {
     
     @Test
     public void registerUserSuccess() throws Exception  {
-        when(userService.addUser(user)).thenReturn(true);
+        when(userService.addUser(any())).thenReturn(true);
         mockMvc.perform(post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(user)))
                 .andExpect(status().isCreated()).andDo(MockMvcResultHandlers.print());

@@ -1,9 +1,9 @@
-package cplayer.userauth.app.controller;
+package cplayer.recommended.app.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cplayer.userauth.app.model.User;
-import cplayer.userauth.app.service.UserService;
+import cplayer.recommended.app.model.Recommended;
+import cplayer.recommended.app.service.RecommendedService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,39 +26,50 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-public class UserAuthControllerTests {
+public class RecommendedControllerTests {
     @Autowired
     private MockMvc mockMvc;
+    
     @MockBean
-    private User user;
+    private Recommended recommended;
+    
     @MockBean
-    UserService userService;
+    RecommendedService recommendedService;
+    
     @InjectMocks
-    UserAuthController userController;
+    RecommendedController recommendedController;
+    
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
-        user = new User();
-        user.setUsername("shivansh");
-        user.setPassword("password");
+        mockMvc = MockMvcBuilders.standaloneSetup(recommendedController).build();
+       
+        recommended = new Recommended();
+		recommended.setPid(1234);
+		recommended.setName("Sachin");
+		recommended.setFullName("Sachin Tendulkar");
+		recommended.setCurrentAge("42 years");
+		recommended.setCountry("India");
+		recommended.setPlayingRole("Opener");
+		recommended.setMajorTeams("India, Mumbai Indians");
+		recommended.setImageURL("sampleimage.jpeg");
     }
     
     
     @Test
     public void registerUserSuccess() throws Exception  {
-        when(userService.addUser(any())).thenReturn(true);
-        mockMvc.perform(post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(user)))
+        when(recommendedService.addData(any())).thenReturn(true);
+        mockMvc.perform(post("/api/recom")
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(recommended)))
                 .andExpect(status().isCreated()).andDo(MockMvcResultHandlers.print());
     }
     
     
     @Test
     public void registerUserFailure() throws Exception {
-        when(userService.addUser(any())).thenReturn(false);
-        mockMvc.perform(post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(user)))
+        when(recommendedService.addData(any())).thenReturn(false);
+        mockMvc.perform(post("/api/recom")
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(recommended)))
                 .andExpect(status().isConflict()).andDo(MockMvcResultHandlers.print());
     }
    

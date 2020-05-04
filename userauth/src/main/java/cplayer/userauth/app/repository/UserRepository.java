@@ -15,3 +15,4 @@ public interface UserRepository extends CrudRepository<User, String> {
 	User validate(String username, String password);
 	
 }
+
