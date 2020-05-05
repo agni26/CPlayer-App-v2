@@ -36,6 +36,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RecomComponent } from './recom/recom.component';
 import { StatOpenerComponent } from './stat-opener/stat-opener.component';
 import { StatviewComponent } from './statview/statview.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { StatviewComponent } from './statview/statview.component';
     RecomComponent,
     StatOpenerComponent,
     StatviewComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

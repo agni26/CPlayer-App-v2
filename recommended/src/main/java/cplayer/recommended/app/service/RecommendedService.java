@@ -22,19 +22,22 @@ public class RecommendedService {
 	}
 
 	public boolean addData(Recommended recommended) {
-		int pid = recommended.getPid();
 		try {
-			if (recommendedRepository.findById(pid).isEmpty()) {
-				recommended.setCount(1);
-				recommendedRepository.save(recommended);
-				return true;
-			} else {
-				int count = recommendedRepository.findById(pid).get().getCount();
-				recommendedRepository.deleteById(pid);
-				recommended.setCount(count + 1);
-				recommendedRepository.save(recommended);
-				return true;
+			int pid = recommended.getPid();
+			List<Recommended> list1 = recommendedRepository.findAll();
+			for (Recommended obj : list1) {
+				if (obj.getPid() == pid) {
+					int count = recommendedRepository.findById(pid).get().getCount();
+					recommendedRepository.deleteById(pid);
+					recommended.setCount(count + 1);
+					recommendedRepository.save(recommended);
+					return true;
+				}
 			}
+			recommended.setCount(1);
+			recommendedRepository.save(recommended);
+			return true;
+
 		} catch (Exception e) {
 			return false;
 		}
@@ -42,11 +45,14 @@ public class RecommendedService {
 
 	public boolean removeData(int id) {
 		try {
-			if (recommendedRepository.findById(id).isPresent()) {
-				Recommended recom = recommendedRepository.findById(id).get();
-				recommendedRepository.deleteById(id);
-				recom.setCount(recom.getCount() - 1);
-				recommendedRepository.save(recom);
+			List<Recommended> list2 = recommendedRepository.findAll();
+			for (Recommended obj1 : list2) {
+				if (obj1.getPid() == id) {
+					Recommended recom = recommendedRepository.findById(id).get();
+					recommendedRepository.deleteById(id);
+					recom.setCount(recom.getCount() - 1);
+					recommendedRepository.save(recom);
+				}
 			}
 			return true;
 		} catch (Exception e) {

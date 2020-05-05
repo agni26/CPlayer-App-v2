@@ -1,11 +1,6 @@
 <!-- Login form -->
 
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <div class="heading">Cricket Player</div>
-        <span class="menu-spacer"></span>
-    </mat-toolbar-row>
-</mat-toolbar>
+<app-header></app-header>
 
 <div class="login"> Login Form</div>
 <form [formGroup]="loginForm" (ngSubmit)="logIn()">
@@ -30,19 +25,10 @@
     </div>
 
     <div class="but">
-        <button value="sign In">Log In</button>
+        <button [disabled]="!loginForm.valid" value="sign In">Log In</button>
         <!--input class="submit"[disabled} = "!loginForm.valid" value="signIn"-->
         <button (click)="tosignup()" value="signIn">New User</button>
     </div>
 </form>
 
-<mat-toolbar class="foot" color="primary">
-    <mat-toolbar-row>
-        <div class="foot-text">Follow us on : </div>
-        <a href="https://www.facebook.com/"><img class="icons" src="../../assets/fb.png"></a>
-        <a href="https://www.instagram.com/"><img class="icons" src="../../assets/insta.png"></a>
-        <a href="https://www.linkedin.com/"><img class="icons" src="../../assets/linkedin.png"></a>
-        <a href="https://www.twitter.com/"><img class="icons" src="../../assets/twitter.png"></a>
-        <div class="copy">@Copyrights 2020 StackRoute. All rights reserved</div>
-    </mat-toolbar-row>
-</mat-toolbar>
+<app-footer></app-footer>

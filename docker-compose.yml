@@ -14,7 +14,7 @@ services:
       context: favourites/
     depends_on: 
       - user-mysql
-    image: webapp2
+    image: favourites
     network_mode: host
     ports: 
       - "8002:8002"
@@ -24,7 +24,7 @@ services:
       context: recommended/
     depends_on: 
       - user-mongo
-    image: webapp4
+    image: recommended
     network_mode: host
     ports: 
       - "8003:8003"
@@ -54,7 +54,7 @@ services:
       context: user/
     depends_on: 
       - user-mongo
-    image: webapp3
+    image: user
     network_mode: host
     ports: 
       - "8001:8001"
@@ -64,7 +64,7 @@ services:
       context: userauth/
     depends_on: 
       - user-mysql
-    image: webapp1
+    image: userauth
     network_mode: host
     ports: 
       - "8000:8000"

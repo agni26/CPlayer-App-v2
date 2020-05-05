@@ -39,7 +39,7 @@ public class FavServiceImplTest {
 		favourites.setStatus(true);
 	}
 	@Test
-    public void addUserSuccess(){
+    public void addFavSuccess(){
         when(favouritesRepository.save((Favourites) any())).thenReturn(favourites);
         Favourites favSaved = favouritesRepository.save(favourites);
         assertEquals(favourites, favSaved);

@@ -57,7 +57,7 @@ public class RecommendedControllerTests {
     
     
     @Test
-    public void registerUserSuccess() throws Exception  {
+    public void addRecomSuccess() throws Exception  {
         when(recommendedService.addData(any())).thenReturn(true);
         mockMvc.perform(post("/api/recom")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(recommended)))
@@ -66,7 +66,7 @@ public class RecommendedControllerTests {
     
     
     @Test
-    public void registerUserFailure() throws Exception {
+    public void addRecomFailure() throws Exception {
         when(recommendedService.addData(any())).thenReturn(false);
         mockMvc.perform(post("/api/recom")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(recommended)))

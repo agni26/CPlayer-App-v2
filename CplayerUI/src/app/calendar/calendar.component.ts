@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CricapiService } from '../cricapi.service';
+import { RouterService } from '../router.service';
 
 @Component({
   selector: 'app-calendar',
@@ -17,7 +18,7 @@ export class CalendarComponent implements OnInit {
 
   //dependency injection of Services
   constructor(private breakpointObserver: BreakpointObserver,
-    private cric: CricapiService) {
+    private cric: CricapiService, private route :RouterService) {
     // paginantion
     this.config = {
       itemsPerPage: 12,
@@ -33,6 +34,11 @@ pageChanged(event) {
 }
 
 ngOnInit(): void {
+
+  if (sessionStorage.getItem('token') == null || sessionStorage.getItem('username') == null) {
+    this.route.tologin();
+  }
+
   var i: number = 0;
 
   // load the upcoming match list on initiation from cric api

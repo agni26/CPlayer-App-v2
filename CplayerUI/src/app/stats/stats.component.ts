@@ -29,6 +29,11 @@ export class StatsComponent implements OnInit {
     this.config.currentPage = event;
   }
   ngOnInit() {
+
+    if (sessionStorage.getItem('token') == null || sessionStorage.getItem('username') == null) {
+      this.route.tologin();
+    }
+
   }
 
   // this method will search player by his name as privided in val

@@ -5,6 +5,7 @@ import { FavouritesService } from '../favourites.service';
 import { Favs } from '../fav';
 import { Recommended } from '../recommended';
 import { RecommendedService } from '../recommended.service';
+import { RouterService } from '../router.service';
 
 @Component({
   selector: 'app-search',
@@ -23,7 +24,8 @@ export class SearchComponent implements OnInit {
   list: Array<Find> = [];
 
   // Dependency Injection of cric api, fav service and recommended service
-  constructor(private cricapi: CricapiService, private favser: FavouritesService, private recomser: RecommendedService) {
+  constructor(private cricapi: CricapiService, private favser: FavouritesService,
+    private recomser: RecommendedService, private route: RouterService) {
     this.val = "";
     // paginantion
     this.config = {
@@ -39,6 +41,10 @@ export class SearchComponent implements OnInit {
     this.config.currentPage = event;
   }
   ngOnInit() {
+    if (sessionStorage.getItem('token') == null || sessionStorage.getItem('username') == null) {
+      this.route.tologin();
+    }
+
   }
 
   // It will call cric api service and get list of players
@@ -66,20 +72,13 @@ export class SearchComponent implements OnInit {
         this.fav.status = false;
         this.fav.username = sessionStorage.getItem('username');
         this.recomser.addData(this.recom, sessionStorage.getItem('token')).subscribe(
-          res => {
-            this.favser.addData(this.fav, sessionStorage.getItem('token'))
-          },
-          err => {
-            if (err.statusText === "OK") {
-              this.favser.addData(this.fav, sessionStorage.getItem('token')).subscribe(
-                res => console.log(res),
-                err => {
-                  if (err.statusText === "OK") {
-                    console.log("Success")
-                  }
-                })
-            }
-          })
+          res => console.log("added to fav"),
+          err => console.log(err)
+        )
+        this.favser.addData(this.fav, sessionStorage.getItem('token')).subscribe(
+          res => console.log("added to recom"),
+          err => console.log(err)
+          )
       },
       err => console.log(err)
     )
@@ -89,18 +88,12 @@ export class SearchComponent implements OnInit {
   removeFromFav(data) {
     data.status = true;
     this.recomser.deleteData(data.pid, sessionStorage.getItem('token')).subscribe(
-      res => this.favser.deleteDataUser(sessionStorage.getItem('username'), data.pid, sessionStorage.getItem('token')).subscribe(
-        res => console.log(res),
-        err => console.log(err)
-      ),
-      err => {
-        if (err.statusText === "OK") {
-          this.favser.deleteDataUser(sessionStorage.getItem('username'), data.pid, sessionStorage.getItem('token')).subscribe(
-            res => console.log("deleted"),
-            err => console.log(err)
-          )
-        }
-      }
+      res => console.log("removed from fav"),
+      err => console.log(err)
+    )
+    this.favser.deleteDataUser(sessionStorage.getItem('username'), data.pid, sessionStorage.getItem('token')).subscribe(
+      res => console.log("removed from recom"),
+      err => console.log(err)
     )
   }
 

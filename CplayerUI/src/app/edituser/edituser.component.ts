@@ -28,6 +28,10 @@ export class EdituserComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (sessionStorage.getItem('token') == null || sessionStorage.getItem('username') == null) {
+      this.route.tologin();
+    }
+
     this.nam = sessionStorage.getItem('username');
     this.token = sessionStorage.getItem('token');
 

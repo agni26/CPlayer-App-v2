@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterService } from '../router.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: RouterService) { }
 
   ngOnInit(): void {
+
+    if (sessionStorage.getItem('token') == null || sessionStorage.getItem('username') == null) {
+      this.route.tologin();
+    }
+
   }
 
 }

@@ -59,7 +59,7 @@ public class FavouritesControllerTests {
     
     
     @Test
-    public void registerUserSuccess() throws Exception  {
+    public void addFavSuccess() throws Exception  {
         when(favouritesService.addData(any())).thenReturn(true);
         mockMvc.perform(post("/api/fav")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(favourites)))
@@ -68,7 +68,7 @@ public class FavouritesControllerTests {
     
     
     @Test
-    public void registerUserFailure() throws Exception {
+    public void addFavFailure() throws Exception {
         when(favouritesService.addData(any())).thenReturn(false);
         mockMvc.perform(post("/api/fav")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(favourites)))

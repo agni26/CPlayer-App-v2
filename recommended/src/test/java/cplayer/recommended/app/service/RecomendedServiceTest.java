@@ -36,7 +36,7 @@ public class RecomendedServiceTest {
 		recommended.setImageURL("sampleimage.jpeg");
 	}
 	@Test
-    public void addUserSuccess(){
+    public void addRecomSuccess(){
         when(recommendedRepository.save((Recommended) any())).thenReturn(recommended);
         Recommended recomSaved = recommendedRepository.save(recommended);
         assertEquals(recommended, recomSaved);
