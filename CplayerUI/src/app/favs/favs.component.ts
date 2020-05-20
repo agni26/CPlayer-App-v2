@@ -4,6 +4,7 @@ import { Favs } from '../fav';
 import { RecommendedService } from '../recommended.service';
 import { Recommended } from '../recommended';
 import { CricapiService } from '../cricapi.service';
+import { RouterService } from '../router.service';
 
 @Component({
   selector: 'app-favs',
@@ -18,7 +19,7 @@ export class FavsComponent implements OnInit {
   recom: Recommended
 
   // dependency injection of required services
-  constructor(private favser : FavouritesService, private recomser : RecommendedService, private cricapi : CricapiService) { }
+  constructor(private favser : FavouritesService, private recomser : RecommendedService, private cricapi : CricapiService, private route: RouterService) { }
 
   // load all the favs of a particular user at the time of initialization
   ngOnInit(): void {
@@ -41,7 +42,7 @@ export class FavsComponent implements OnInit {
       err => {
         if (err.statusText === "OK") {
           this.favser.deleteDataUser(sessionStorage.getItem('username'), data.pid, sessionStorage.getItem('token')).subscribe(
-            res => location.reload(),
+            res => this.route.tohelp(),
             err => console.log(err)
           )
         }

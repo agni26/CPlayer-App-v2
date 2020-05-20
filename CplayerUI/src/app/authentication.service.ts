@@ -16,7 +16,7 @@ export class AuthenticationService {
 
   // Method to register a new user into the authentication database
   public signup(userauth: UserAuth): Observable<any> {
-    return this.httpClient.post<UserAuth>('http://localhost:8000/api/auth/register', userauth).pipe(
+    return this.httpClient.post<UserAuth>('http://50.23.1.37:32000/api/auth/register', userauth).pipe(
       map(
         userData => {
           return userData;
@@ -35,7 +35,7 @@ export class AuthenticationService {
 
   // Method to validate a user and create a JWT tokan for him
   public login(userinfo: UserAuth): Observable<any> {
-    return this.httpClient.post<any>('http://localhost:8000/api/auth/login', userinfo).pipe(
+    return this.httpClient.post<any>('http://50.23.1.37:32000/api/auth/login', userinfo).pipe(
       map(
         userData => {
           return userData;
@@ -44,7 +44,7 @@ export class AuthenticationService {
 
   // Method to delete user details of a particular user
   public deleteUser(username: string, token: string): Observable<any> {
-    return this.httpClient.delete<any>(`http://localhost:8000/api/auth/pro/user?username=${username}`, {
+    return this.httpClient.delete<any>(`http://50.23.1.37:32000/api/auth/pro/user?username=${username}`, {
       headers: new HttpHeaders().set("Authorization", `Bearer ${token}`)
     }).pipe(
       map(
@@ -55,7 +55,7 @@ export class AuthenticationService {
 
   // method to update the password of a particular user
   public updateUser(user: UserAuth, pass: string, token: string): Observable<any> {
-    return this.httpClient.put<any>(`http://localhost:8000/api/auth/pro/user`,{"username":`${user.username}`,"oldpass":`${user.password}`,"newpass":`${pass}`} ,{
+    return this.httpClient.put<any>(`http://50.23.1.37:32000/api/auth/pro/user`,{"username":`${user.username}`,"oldpass":`${user.password}`,"newpass":`${pass}`} ,{
       headers: new HttpHeaders().set("Authorization", `Bearer ${token}`)
     }).pipe(
       map(

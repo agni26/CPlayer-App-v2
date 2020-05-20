@@ -7,12 +7,13 @@
     </button>
     <div class="heading">Cricket Player</div>
     <div class="top">
-      <a mat-button routerLink="search"> Search </a>
-      <a mat-button routerLink="favs"> Favourites </a>
-      <a mat-button routerLink="recom"> Recommended </a>
-      <a mat-button routerLink="stats"> Statistics </a>
-      <a mat-button routerLink="cal"> Calendar</a>
-      <a mat-button routerLink="contact"> About Us </a>
+      <a mat-button routerLink="search">Search </a>
+      <a mat-button routerLink="favs">Favourites </a>
+      <a mat-button routerLink="recom">Recommended </a>
+      <a mat-button routerLink="stats">Statistics </a>
+      <a mat-button routerLink="cal">Calendar</a>
+      <a mat-button routerLink="news">News</a>
+      <a mat-button routerLink="contact"> Contact Us </a>
     </div>
     <div class="dropdown">
       <img class="img" src={{user.image}} width="55" height="55">
@@ -28,11 +29,12 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-nav-list class="side">
-      <a mat-list-item routerLink="search"> Search Player </a>
+      <a mat-list-item routerLink="search"> Search </a>
       <a mat-list-item routerLink="favs"> Favourites </a>
       <a mat-list-item routerLink="recom"> Recommended </a>
       <a mat-list-item routerLink="stats"> Statistics </a>
-      <a mat-list-item routerLink="cal"> Upcoming Matches </a>
+      <a mat-list-item routerLink="cal"> Calendar </a>
+      <a mat-button routerLink="news">News</a>
       <a mat-list-item routerLink="contact"> Contact Us </a>
     </mat-nav-list>
   </mat-sidenav>

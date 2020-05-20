@@ -25,7 +25,7 @@ public class UserController {
 	private UserService userService;
 
 	/*
-	 * http://localhost:8000/api/user/token (Get)
+	 * http://localhost:8000/api/user/pro/token (Get)
 	 * End point for getting user information from the DB
 	 * If getting successfully returning status as Created (201)
 	 * Otherwise returning status as Conflict
@@ -82,7 +82,7 @@ public class UserController {
 	@PostMapping
 	public ResponseEntity<?> adduser(@RequestBody User user) {
 		if (userService.addUser(user)) {
-			return new ResponseEntity<String>("ok", HttpStatus.CREATED);
+			return new ResponseEntity<String>("ok", HttpStatus.OK);
 		} else
 			return new ResponseEntity<String>("no", HttpStatus.CONFLICT);
 	}

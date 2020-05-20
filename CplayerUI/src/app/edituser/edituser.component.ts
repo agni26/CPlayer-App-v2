@@ -84,7 +84,7 @@ export class EdituserComponent implements OnInit {
       err => {
         if (err.statusText === "OK") {
           console.log("success");
-          location.reload();
+          this.route.back();
         }
       }
     )
@@ -101,7 +101,7 @@ export class EdituserComponent implements OnInit {
       err => {
         if (err.statusText === "OK") {
           console.log("success");
-          location.reload();
+          this.route.back();
         }
       }
     )

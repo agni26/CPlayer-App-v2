@@ -49,6 +49,7 @@ public class UserAuthController {
 		else return new ResponseEntity<String>("no", HttpStatus.CONFLICT);
 
 	}
+	//localhost:8000/api/auth/register (POST)
 	
 	/*
 	 * http://localhost:8000/api/auth/ (Delete)
@@ -95,7 +96,7 @@ public class UserAuthController {
 		try {
 			
 			// Calling the getToken method as written below
-			jwtToken = getToken(user.getUsername(),user.getPassword());
+			jwtToken = getToken(user.getUsername(), user.getPassword());
 			map.clear();
 			map.put("message", "User logged in successfully");
 			map.put("Token",jwtToken);

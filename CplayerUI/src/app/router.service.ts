@@ -32,9 +32,12 @@ export class RouterService {
 
   // method to redirect to fav component
   tofav(){
-    this.router.navigate(["/favs"])
+    this.router.navigate(["/dashboard/favs"])
   }
 
+  tohelp(){
+    this.router.navigate(["/dashboard/help"])
+  }
   // method to navigate to stat opener with the player pid whose statistics are to be shown
   tostatOpener(pid){
     this.router.navigate(['dashboard',{

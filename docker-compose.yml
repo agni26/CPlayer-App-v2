@@ -4,7 +4,7 @@ services:
   angular: 
     build: CplayerUI
     container_name: angular-docker
-    image: angular-app
+    image: shivaagn/angular-app:v4
     network_mode: host
     ports: 
       - "4200:4200"
@@ -12,9 +12,7 @@ services:
   favourites: 
     build: 
       context: favourites/
-    depends_on: 
-      - user-mysql
-    image: favourites
+    image: shivaagn/fav:v4
     network_mode: host
     ports: 
       - "8002:8002"
@@ -22,39 +20,15 @@ services:
   recommended: 
     build: 
       context: recommended/
-    depends_on: 
-      - user-mongo
-    image: recommended
+    image: shivaagn/recommended:v4
     network_mode: host
     ports: 
       - "8003:8003"
     restart: always
-  user-mongo: 
-    environment: 
-      MONGO_DATABASE: cplayerapp
-      MONGO_HOST: localhost
-      MONGO_PORT: 27017
-    image: mongo
-    network_mode: host
-    ports: 
-      - "27017:27017"
-  user-mysql: 
-    environment: 
-      MYSQL_DATABASE: Cplayerdb
-      MYSQL_HOST: localhost
-      MYSQL_USER: root
-      MYSQL_PASSWORD:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    image: "mysql:5.7"
-    network_mode: host
-    ports: 
-      - "3306:3306"
   user: 
     build: 
       context: user/
-    depends_on: 
-      - user-mongo
-    image: user
+    image: shivaagn/user:v4
     network_mode: host
     ports: 
       - "8001:8001"
@@ -62,9 +36,7 @@ services:
   userauth: 
     build: 
       context: userauth/
-    depends_on: 
-      - user-mysql
-    image: userauth
+    image: shivaagn/userauth:v4
     network_mode: host
     ports: 
       - "8000:8000"

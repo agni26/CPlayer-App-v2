@@ -38,6 +38,8 @@ import { StatOpenerComponent } from './stat-opener/stat-opener.component';
 import { StatviewComponent } from './statview/statview.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { NewsComponent } from './news/news.component';
+import { HelperComponent } from './helper/helper.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { FooterComponent } from './footer/footer.component';
     StatviewComponent,
     HeaderComponent,
     FooterComponent,
+    NewsComponent,
+    HelperComponent,
   ],
   imports: [
     BrowserModule,

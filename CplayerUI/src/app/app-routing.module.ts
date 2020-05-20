@@ -11,6 +11,8 @@ import { FavsComponent } from './favs/favs.component';
 import { RecomComponent } from './recom/recom.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { StatOpenerComponent } from './stat-opener/stat-opener.component';
+import { NewsComponent } from './news/news.component';
+import { HelperComponent } from './helper/helper.component';
 
 // declaring the routes here
 const routes: Routes = [
@@ -57,6 +59,10 @@ const routes: Routes = [
         path: 'favs',
         component: FavsComponent,
       },
+      {
+        path: 'help',
+        component: HelperComponent,
+      },
       // path of recommended component
       {
         path: 'recom',
@@ -76,6 +82,11 @@ const routes: Routes = [
       {
         path: 'contact',
         component: ContactComponent
+      },
+      // path for the news component
+      {
+        path: 'news',
+        component : NewsComponent
       },
       // path of stats opener with providin the pid of the player clicked
       {

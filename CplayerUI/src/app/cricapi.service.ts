@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 // service to access the methods of cric api (www.cricapi.com)
 export class CricapiService {
 
@@ -33,6 +34,11 @@ export class CricapiService {
   // Get the schedule of upcoming matches
   matchcalendar(): Observable<any> {
     return this.http.get<any>(`https://cricapi.com/api/matches?apikey=${this.apikey}`)
+  }
+
+  // Get sports news
+  newsSports():Observable<any>{
+    return this.http.get<any>('http://newsapi.org/v2/top-headlines?country=in&category=sports&apiKey=144d87b6f02944989fc3e65deaae19a6')
   }
 
 
